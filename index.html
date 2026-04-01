@@ -7,31 +7,86 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Poppins',sans-serif;background:#fafafa}
 
-header{background:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-header img{width:120px}
+header{
+  background:#fff;
+  padding:12px 15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-nav a{margin:0 10px;text-decoration:none;color:#ff4d8d;font-weight:500;cursor:pointer}
+header img{width:110px}
+
+nav{
+  display:flex;
+  gap:8px;
+}
+
+nav a{
+  padding:8px 12px;
+  border-radius:20px;
+  text-decoration:none;
+  color:#ff4d8d;
+  font-weight:500;
+  font-size:13px;
+  background:#fff0f5;
+}
+
+nav a.active{
+  background:#ff4d8d;
+  color:#fff;
+}
 
 section{display:none;padding:20px}
 .active{display:block}
 
-.hero{text-align:center;padding:40px 20px;background:linear-gradient(120deg,#ff7eb3,#ff4d8d);color:#fff}
+.hero{
+  text-align:center;
+  padding:50px 20px;
+  background:linear-gradient(120deg,#ff7eb3,#ff4d8d);
+  color:#fff;
+  border-radius:0 0 20px 20px;
+}
 
-.catalogo{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px}
+.catalogo{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
 
-.produto{background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.produto{
+  background:#fff;
+  border-radius:15px;
+  padding:10px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.08)
+}
+
 .produto img{width:100%;border-radius:10px}
-.preco{color:#ff4d8d;font-weight:bold}
+.preco{color:#ff4d8d;font-weight:bold;margin:5px 0}
 
-.btn{background:#25d366;color:#fff;padding:8px 12px;border-radius:20px;display:inline-block;margin-top:5px;cursor:pointer}
+.btn{
+  background:#ff4d8d;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:20px;
+  display:inline-block;
+  margin-top:5px;
+  cursor:pointer;
+  font-size:13px
+}
 
 .carrinho{
   position:fixed;
   bottom:20px;
   right:20px;
-  background:#ff4d8d;
+  background:#25d366;
   color:#fff;
-  padding:12px 16px;
+  padding:12px 15px;
   border-radius:50px;
   cursor:pointer;
   font-size:14px;
@@ -40,12 +95,26 @@ section{display:none;padding:20px}
   align-items:center;
 }
 
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;padding:20px;display:none;overflow:auto}
+.modal{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:#fff;
+  padding:20px;
+  display:none;
+  overflow:auto
+}
 
 .item{display:flex;justify-content:space-between;margin-bottom:10px}
 .remover{color:red;cursor:pointer}
 
-select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px}
+input,select,button{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ddd
+}
 
 .total-geral{font-size:12px;margin-top:3px}
 
@@ -53,10 +122,10 @@ select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px}
 <body><header>
   <img src="logo.jpg">
   <nav>
-    <a onclick="mostrar('inicio')">Início</a>
-    <a onclick="mostrar('catalogo')">Catálogo</a>
-    <a onclick="mostrar('sobre')">Sobre</a>
-    <a onclick="mostrar('contato')">Contato</a>
+    <a id="btn-inicio" onclick="mostrar('inicio')" class="active">Início</a>
+    <a id="btn-catalogo" onclick="mostrar('catalogo')">Catálogo</a>
+    <a id="btn-sobre" onclick="mostrar('sobre')">Sobre</a>
+    <a id="btn-contato" onclick="mostrar('contato')">Contato</a>
   </nav>
 </header><section id="inicio" class="active">
   <div class="hero">
@@ -83,22 +152,15 @@ select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px}
 </section><section id="sobre">
   <h2>Sobre a Loja</h2>
   <p><strong>Endereço:</strong> Rua das Violetas n°233, Itambé, Pernambuco, Brazil</p>
-  <h3>Missão</h3>
-  <p>Realçar a beleza com produtos acessíveis e de qualidade.</p>
-  <h3>Visão</h3>
-  <p>Ser referência em maquiagem acessível.</p>
-  <h3>Valores</h3>
-  <p>Qualidade, confiança e atendimento com carinho.</p>
 </section><section id="contato">
   <h2>Contato</h2>
   <p>📱 WhatsApp: 11 93910-2961</p>
-  <p>📸 Instagram: (em breve)</p>
 </section><div class="carrinho" onclick="abrirCarrinho()">
   🛒 <span id="qtd">0</span>
   <div class="total-geral">R$ <span id="totalBtn">0</span></div>
 </div><div class="modal" id="modal">
   <h2>Seu Carrinho</h2>
-  <div id="lista"></div>  <input id="nomeCliente" placeholder="Seu nome" style="width:100%;margin-top:10px;padding:10px;border-radius:10px;border:1px solid #ddd">  <select id="pagamento">
+  <div id="lista"></div>  <input id="nomeCliente" placeholder="Seu nome">  <select id="pagamento">
     <option>Forma de pagamento</option>
     <option>Pix</option>
     <option>Crédito</option>
@@ -107,14 +169,17 @@ select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px}
     <option>Entrega ou retirada</option>
     <option value="retirada">Retirar na loja</option>
     <option value="entrega">Entrega (+2)</option>
-  </select>  <input id="endereco" placeholder="Endereço (se for entrega)" style="width:100%;margin-top:10px;padding:10px;border-radius:10px;border:1px solid #ddd">  <p>Total: R$ <span id="total">0</span></p><button onclick="finalizar()">Finalizar Pedido</button> <button onclick="copiarPedido()">Copiar pedido</button> <button onclick="fecharCarrinho()">Fechar</button>
+  </select>  <input id="endereco" placeholder="Endereço (se for entrega)">  <p>Total: R$ <span id="total">0</span></p><button onclick="finalizar()">Finalizar Pedido</button> <button onclick="fecharCarrinho()">Fechar</button>
 
 </div><script>
 let carrinho=[];
 
 function mostrar(sec){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+
   document.getElementById(sec).classList.add('active');
+  document.getElementById('btn-'+sec).classList.add('active');
 }
 
 function add(nome,preco){
@@ -145,7 +210,7 @@ function remover(i){carrinho.splice(i,1);update();}
 function abrirCarrinho(){document.getElementById('modal').style.display='block';update();}
 function fecharCarrinho(){document.getElementById('modal').style.display='none';}
 
-function montarTexto(){
+function finalizar(){
   let pagamento=document.getElementById('pagamento').value;
   let tipo=document.getElementById('tipo').value;
   let nome=document.getElementById('nomeCliente').value || 'Cliente';
@@ -168,19 +233,8 @@ function montarTexto(){
   }
 
   texto+='%0AAguardo confirmação 💖';
-  return texto;
-}
 
-function finalizar(){
-  let texto=montarTexto();
   window.open('https://wa.me/5511939102961?text='+texto);
-}
-
-function copiarPedido(){
-  let texto=decodeURIComponent(montarTexto().replace(/%0A/g,'
-'));
-  navigator.clipboard.writeText(texto);
-  alert('Pedido copiado!');
 }
 </script></body>
 </html>
