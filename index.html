@@ -1,45 +1,47 @@
-<!-- Modal atualizado -->
-<div class="modal" id="modal">
-  <h2>🛒 Seu Carrinho</h2>
-
-  <!-- Nome do cliente sempre visível -->
-  <div class="nome-cliente">
-    <label for="nomeCliente">Nome:</label>
-    <input id="nomeCliente" placeholder="Seu nome">
-  </div>
-
-  <div id="lista"></div>
-
-  <div class="opcoes">
-    <select id="pagamento">
-      <option>Forma de pagamento</option>
-      <option>Pix</option>
-      <option>Crédito</option>
-      <option>Dinheiro</option>
-    </select>
-
-    <select id="tipo" onchange="update()">
-      <option>Entrega ou retirada</option>
-      <option value="retirada">Retirar na loja</option>
-      <option value="entrega">Entrega</option>
-    </select>
-
-    <input id="endereco" placeholder="Endereço (se for entrega)">
-  </div>
-
-  <div class="resumo">
-    <p><span>Subtotal</span><span>R$ <span id="subtotal">0</span></span></p>
-    <p><span>Frete</span><span>R$ <span id="frete">0</span></span></p>
-    <p class="total-final"><span>Total</span><span>R$ <span id="total">0</span></span></p>
-    <div style="font-size:12px;margin-bottom:8px;color:#555">💖 Mais de 100 clientes satisfeitas</div>
-    <button class="finalizar" onclick="finalizar()">Finalizar Pedido</button>
-  </div>
-
-  <button class="fechar" onclick="fecharCarrinho()">Fechar</button>
-</div>
-
-<!-- CSS atualizado -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glow Make</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#f6f6f6}
+
+header{background:#fff;padding:10px 15px;display:flex;flex-direction:column;gap:10px;box-shadow:0 2px 10px rgba(0,0,0,.05);position:sticky;top:0;z-index:1000}
+.topo{display:flex;justify-content:space-between;align-items:center}
+header img{width:100px}
+
+.carrinho-top{background:linear-gradient(135deg,#25d366,#1da851);color:#fff;padding:10px 14px;border-radius:20px;font-size:12px;display:flex;flex-direction:column;align-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.15);transition:.2s}
+.carrinho-top:active{transform:scale(0.95)}
+
+nav{display:flex;gap:8px;overflow:auto}
+nav a{padding:8px 12px;border-radius:20px;text-decoration:none;color:#ff4d8d;font-weight:500;font-size:13px;background:#fff0f5;white-space:nowrap}
+nav a.active{background:#ff4d8d;color:#fff}
+
+section{display:none;padding:20px}
+.active{display:block}
+
+.hero{margin-top:10px;text-align:center;padding:50px 20px;background:linear-gradient(135deg,#ff7eb3,#ff4d8d);color:#fff;border-radius:25px}
+
+.info,.mvv{margin-top:15px;background:#fff;padding:15px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,.05);font-size:14px}
+.mvv h3{color:#ff4d8d;margin-top:10px}
+
+.avaliacoes{margin-top:15px;background:#fff;padding:15px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,.05);animation:fade .6s}
+.avaliacoes h3{margin-bottom:10px;color:#ff4d8d}
+.review{font-size:13px;margin-bottom:8px;opacity:.9;animation:slideUp .5s ease}
+.review span{display:block}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.catalogo{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.produto{background:#fff;border-radius:15px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.produto img{width:100%;border-radius:10px}
+.preco{color:#ff4d8d;font-weight:bold;margin:5px 0}
+.btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;cursor:pointer}
+
 .modal {
   position: fixed;
   top: 0; left: 0;
@@ -50,6 +52,7 @@
   overflow-y: auto;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 15px;
+  z-index: 9999;
 }
 
 .modal h2 {
@@ -85,6 +88,12 @@
   background: #fff;
   margin-bottom: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.qtd-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .qtd-box button {
@@ -141,4 +150,205 @@
   font-weight: 600;
   margin-top: 10px;
 }
+
+input, select, button{width:100%;margin-top:10px;padding:10px;border-radius:10px;border:1px solid #ddd}
+.whats-btn{display:flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:12px;border-radius:12px;text-decoration:none;margin-top:10px;justify-content:center}
 </style>
+</head>
+<body>
+
+<header>
+  <div class="topo">
+    <img src="logo.jpg">
+    <div class="carrinho-top" onclick="abrirCarrinho()">
+      🛒 <span id="qtd">0</span>
+      R$ <span id="totalBtn">0</span>
+    </div>
+  </div>
+  <nav>
+    <a id="btn-inicio" onclick="mostrar('inicio')" class="active">Início</a>
+    <a id="btn-catalogo" onclick="mostrar('catalogo')">Catálogo</a>
+    <a id="btn-sobre" onclick="mostrar('sobre')">Sobre</a>
+    <a id="btn-contato" onclick="mostrar('contato')">Contato</a>
+  </nav>
+</header>
+
+<section id="inicio" class="active">
+  <div class="hero">
+    <h2>Glow Make ✨</h2>
+    <p>Beleza e brilho para você</p>
+  </div>
+  <div class="info">
+    🚚 Entregamos para todo Brasil<br>
+    📦 Retirada em loja disponível
+  </div>
+  <div class="mvv">
+    <h3>Missão</h3>
+    <p>Oferecer produtos de beleza acessíveis que elevem a autoestima.</p>
+    <h3>Visão</h3>
+    <p>Ser referência em beleza acessível.</p>
+    <h3>Valores</h3>
+    <p>Qualidade, confiança e autoestima.</p>
+  </div>
+  <div class="avaliacoes">
+    <h3>⭐ Avaliações de Clientes</h3>
+    <div class="review">★★★★★ <span>“Perfeitos, amei demais 😍”</span> – Juliana</div>
+    <div class="review">★★★★★ <span>“Chegou rápido e bem embalado!”</span> – Camila</div>
+    <div class="review">★★★★★ <span>“Muito barato e de qualidade ❤️”</span> – Fernanda</div>
+  </div>
+</section>
+
+<section id="catalogo">
+  <h2>Catálogo</h2>
+  <div class="catalogo">
+    <div class="produto">
+      <img src="logo.jpg">
+      <h3>Batom</h3>
+      <div style="font-size:12px;color:#f5a623">★★★★★ (32)</div>
+      <p class="preco">R$ 5,00</p>
+      <div class="btn" onclick="add('Batom',5)">🛍️ Comprar</div>
+    </div>
+
+    <div class="produto">
+      <img src="logo.jpg">
+      <h3>Gloss</h3>
+      <div style="font-size:12px;color:#f5a623">★★★★★ (18)</div>
+      <p class="preco">R$ 10,00</p>
+      <div class="btn" onclick="add('Gloss',10)">🛍️ Comprar</div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <h2>Sobre a Loja</h2>
+  <p>Rua das Violetas n°233, Itambé, Pernambuco</p>
+</section>
+
+<section id="contato">
+  <h2>Contato</h2>
+  <a class="whats-btn" href="https://wa.me/5511939102961" target="_blank">
+    <i data-lucide="message-circle"></i>
+    Falar no WhatsApp
+  </a>
+</section>
+
+<!-- Modal do Carrinho -->
+<div class="modal" id="modal">
+  <h2>🛒 Seu Carrinho</h2>
+  <div class="nome-cliente">
+    <label for="nomeCliente">Nome:</label>
+    <input id="nomeCliente" placeholder="Seu nome">
+  </div>
+  <div id="lista"></div>
+
+  <div class="opcoes">
+    <select id="pagamento">
+      <option>Forma de pagamento</option>
+      <option>Pix</option>
+      <option>Crédito</option>
+      <option>Dinheiro</option>
+    </select>
+
+    <select id="tipo" onchange="update()">
+      <option>Entrega ou retirada</option>
+      <option value="retirada">Retirar na loja</option>
+      <option value="entrega">Entrega</option>
+    </select>
+
+    <input id="endereco" placeholder="Endereço (se for entrega)">
+  </div>
+
+  <div class="resumo">
+    <p><span>Subtotal</span><span>R$ <span id="subtotal">0</span></span></p>
+    <p><span>Frete</span><span>R$ <span id="frete">0</span></span></p>
+    <p class="total-final"><span>Total</span><span>R$ <span id="total">0</span></span></p>
+    <div style="font-size:12px;margin-bottom:8px;color:#555">💖 Mais de 100 clientes satisfeitas</div>
+    <button class="finalizar" onclick="finalizar()">Finalizar Pedido</button>
+  </div>
+
+  <button class="fechar" onclick="fecharCarrinho()">Fechar</button>
+</div>
+
+<script>
+lucide.createIcons();
+
+let carrinho=[];
+
+function mostrar(sec){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  document.getElementById(sec).classList.add('active');
+  document.getElementById('btn-'+sec).classList.add('active');
+}
+
+function add(nome,preco){
+  let item=carrinho.find(i=>i.nome===nome);
+  if(item){item.qtd++}else{carrinho.push({nome,preco,qtd:1})}
+  update();
+}
+
+function update(){
+  document.getElementById('qtd').innerText=carrinho.reduce((a,b)=>a+b.qtd,0);
+  let lista=document.getElementById('lista');
+  lista.innerHTML='';
+
+  let subtotal=0;
+
+  carrinho.forEach((i,index)=>{
+    subtotal+=i.preco*i.qtd;
+    lista.innerHTML+=`<div class="item">
+      ${i.nome}
+      <div class="qtd-box">
+        <button onclick="diminuir(${index})">-</button>
+        ${i.qtd}
+        <button onclick="aumentar(${index})">+</button>
+      </div>
+      R$${(i.preco*i.qtd).toFixed(2)}
+    </div>`;
+  });
+
+  let frete=document.getElementById('tipo').value==='entrega'?2:0;
+  let total=subtotal+frete;
+
+  document.getElementById('subtotal').innerText=subtotal.toFixed(2);
+  document.getElementById('frete').innerText=frete.toFixed(2);
+  document.getElementById('total').innerText=total.toFixed(2);
+  document.getElementById('totalBtn').innerText=total.toFixed(2);
+}
+
+function aumentar(i){carrinho[i].qtd++;update();}
+function diminuir(i){if(carrinho[i].qtd>1){carrinho[i].qtd--}else{carrinho.splice(i,1)}update();}
+
+function abrirCarrinho(){document.getElementById('modal').style.display='block';update();}
+function fecharCarrinho(){document.getElementById('modal').style.display='none';}
+
+function finalizar(){
+  let pagamento=document.getElementById('pagamento').value;
+  let tipo=document.getElementById('tipo').value;
+  let nome=document.getElementById('nomeCliente').value || 'Cliente';
+  let endereco=document.getElementById('endereco').value;
+
+  let texto='Olá! Vim pelo site da Glow Make 😊%0A%0A';
+  texto+=`👤 Nome: ${nome}%0A%0A`;
+  texto+='🛍️ Pedido:%0A';
+
+  carrinho.forEach(i=>{
+    texto+=`• ${i.nome} x${i.qtd}%0A`;
+  });
+
+  texto+=`%0A💰 Total: R$${document.getElementById('total').innerText}%0A`;
+  texto+=`💳 Pagamento: ${pagamento}%0A`;
+  texto+=`📦 Forma: ${tipo==='entrega'?'Entrega':'Retirada'}%0A`;
+
+  if(tipo==='entrega' && endereco){
+    texto+=`📍 Endereço: ${endereco}%0A`;
+  }
+
+  texto+='%0AAguardo confirmação 💖';
+
+  window.open('https://wa.me/5511939102961?text='+texto);
+}
+</script>
+
+</body>
+</html>
