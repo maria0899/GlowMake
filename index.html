@@ -5,79 +5,140 @@
   <title>Glow Make</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Poppins', sans-serif; background: #fafafa; }header { text-align: center; padding: 20px; background: white; }
-header img { width: 150px; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Poppins',sans-serif;background:#fafafa}header{text-align:center;padding:15px;background:#fff}
+header img{width:130px}
 
-.carrinho {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background: #ff4d8d;
-  color: white;
-  padding: 10px;
-  border-radius: 20px;
-  cursor: pointer;
-}
+.home{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.btn-entrar{background:#ff4d8d;color:#fff;padding:15px 25px;border-radius:30px;cursor:pointer;margin-top:20px}
 
-.box-carrinho {
-  position: fixed;
-  right: 10px;
-  top: 60px;
-  background: white;
-  width: 250px;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  display: none;
-}
+.loja{display:none}
 
-.produto { background: white; margin: 10px; padding: 10px; border-radius: 10px; text-align: center; }
-.btn { background: #25d366; color: white; padding: 8px; border-radius: 20px; display: inline-block; margin-top: 5px; cursor: pointer; }
+.topo{background:linear-gradient(120deg,#ff7eb3,#ff4d8d);color:#fff;text-align:center;padding:20px}
+
+.carrinho{position:fixed;top:10px;right:10px;background:#ff4d8d;color:#fff;padding:10px 15px;border-radius:20px;cursor:pointer}
+
+.box-carrinho{position:fixed;right:10px;top:60px;background:#fff;width:280px;padding:15px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.2);display:none}
+
+.item{display:flex;justify-content:space-between;margin-bottom:5px;font-size:14px}
+.remover{color:red;cursor:pointer}
+
+.catalogo{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px;padding:15px}
+
+.produto{background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.produto img{width:100%;border-radius:10px}
+
+.preco{color:#ff4d8d;font-weight:bold}
+
+.btn{background:#25d366;color:#fff;padding:8px 12px;border-radius:20px;display:inline-block;margin-top:5px;cursor:pointer}
+
+select{width:100%;margin-top:10px;padding:5px}
 
   </style>
 </head>
-<body><div class="carrinho" onclick="toggleCarrinho()">🛒 Carrinho (<span id="qtd">0</span>)</div><div class="box-carrinho" id="box">
+<body><!-- TELA INICIAL --><div class="home" id="home">
+  <img src="logo.jpg">
+  <h2>Bem-vinda à Glow Make ✨</h2>
+  <p>Maquiagens a partir de R$5</p>
+  <div class="btn-entrar" onclick="entrar()">Ver Catálogo</div>
+</div><!-- LOJA --><div class="loja" id="loja"><div class="carrinho" onclick="toggleCarrinho()">🛒 (<span id="qtd">0</span>)</div><div class="box-carrinho" id="box">
   <h3>Seu carrinho</h3>
-  <ul id="lista"></ul>
-  <button onclick="finalizar()">Finalizar no WhatsApp</button>
+  <div id="lista"></div>  <select id="pagamento">
+    <option value="">Forma de pagamento</option>
+    <option>Crédito</option>
+    <option>Pix</option>
+    <option>Dinheiro</option>
+  </select>  <select id="entrega">
+    <option value="">Entrega ou retirada?</option>
+    <option value="retirada">Retirar na loja</option>
+    <option value="entrega">Entrega (+R$2)</option>
+  </select>  <p>Total: R$ <span id="total">0</span></p><button onclick="finalizar()">Finalizar</button>
+
 </div><header>
   <img src="logo.jpg">
-</header><div class="produto">
-  <h3>Base Matte</h3>
-  <p>R$ 9,90</p>
-  <div class="btn" onclick="addCarrinho('Base Matte - R$9,90')">Adicionar</div>
-</div><div class="produto">
-  <h3>Batom Matte</h3>
-  <p>R$ 5,90</p>
-  <div class="btn" onclick="addCarrinho('Batom Matte - R$5,90')">Adicionar</div>
-</div><script>
+</header><div class="topo">
+  <h2>Catálogo</h2>
+  <p>Produtos de R$5 e R$10</p>
+</div><div class="catalogo">  <div class="produto">
+    <img src="logo.jpg">
+    <h3>Batom</h3>
+    <p class="preco">R$ 5,00</p>
+    <div class="btn" onclick="addCarrinho('Batom',5)">Adicionar</div>
+  </div>  <div class="produto">
+    <img src="logo.jpg">
+    <h3>Gloss</h3>
+    <p class="preco">R$ 10,00</p>
+    <div class="btn" onclick="addCarrinho('Gloss',10)">Adicionar</div>
+  </div></div></div><script>
 let carrinho = [];
 
-function addCarrinho(produto){
-  carrinho.push(produto);
+function entrar(){
+  document.getElementById('home').style.display='none';
+  document.getElementById('loja').style.display='block';
+}
+
+function addCarrinho(nome, preco){
+  let existente = carrinho.find(item => item.nome === nome);
+
+  if(existente){
+    existente.qtd++;
+  } else {
+    carrinho.push({nome, preco, qtd:1});
+  }
+
   atualizar();
 }
 
 function atualizar(){
   document.getElementById('qtd').innerText = carrinho.length;
+
   let lista = document.getElementById('lista');
   lista.innerHTML = '';
-  carrinho.forEach(item => {
-    let li = document.createElement('li');
-    li.innerText = item;
-    lista.appendChild(li);
+
+  let total = 0;
+
+  carrinho.forEach((item,index)=>{
+    total += item.preco * item.qtd;
+
+    let div = document.createElement('div');
+    div.className='item';
+    div.innerHTML = `${item.nome} x${item.qtd} - R$${(item.preco*item.qtd).toFixed(2)} <span class="remover" onclick="remover(${index})">❌</span>`;
+    lista.appendChild(div);
   });
+
+  let entrega = document.getElementById('entrega').value;
+  if(entrega==='entrega') total += 2;
+
+  document.getElementById('total').innerText = total.toFixed(2);
+}
+
+function remover(index){
+  carrinho.splice(index,1);
+  atualizar();
 }
 
 function toggleCarrinho(){
-  let box = document.getElementById('box');
-  box.style.display = box.style.display === 'block' ? 'none' : 'block';
+  let box=document.getElementById('box');
+  box.style.display = box.style.display==='block'?'none':'block';
 }
 
 function finalizar(){
-  let texto = 'Pedido:%0A' + carrinho.join('%0A');
-  window.open('https://wa.me/5511939102961?text=' + texto, '_blank');
+  let pagamento=document.getElementById('pagamento').value;
+  let entrega=document.getElementById('entrega').value;
+
+  let texto = '✨ *Pedido Glow Make* ✨%0A%0A';
+
+  carrinho.forEach(item=>{
+    texto += `• ${item.nome} x${item.qtd}%0A`;
+  });
+
+  texto += `%0A💰 Total: R$${document.getElementById('total').innerText}%0A`;
+  texto += `💳 Pagamento: ${pagamento}%0A`;
+  texto += `📦 ${entrega==='entrega'?'Entrega':'Retirada na loja'}%0A`;
+
+  texto += '%0AObrigada! 😊';
+
+  window.open('https://wa.me/5511939102961?text='+texto,'_blank');
 }
 </script></body>
 </html>
