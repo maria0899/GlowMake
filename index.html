@@ -3,120 +3,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glow Make</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"><style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script><style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Poppins',sans-serif;background:#fafafa}
 
-header{
-  background:#fff;
-  padding:12px 15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 2px 10px rgba(0,0,0,.05);
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
-
+header{background:#fff;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.05);position:sticky;top:0;z-index:1000}
 header img{width:110px}
 
-nav{
-  display:flex;
-  gap:8px;
-}
+nav{display:flex;gap:8px}
+nav a{padding:8px 12px;border-radius:20px;text-decoration:none;color:#ff4d8d;font-weight:500;font-size:13px;background:#fff0f5;transition:.3s}
+nav a:active{transform:scale(0.9)}
+nav a.active{background:#ff4d8d;color:#fff}
 
-nav a{
-  padding:8px 12px;
-  border-radius:20px;
-  text-decoration:none;
-  color:#ff4d8d;
-  font-weight:500;
-  font-size:13px;
-  background:#fff0f5;
-}
-
-nav a.active{
-  background:#ff4d8d;
-  color:#fff;
-}
-
-section{display:none;padding:20px}
+section{display:none;padding:20px;animation:fade .3s ease}
 .active{display:block}
 
-.hero{
-  text-align:center;
-  padding:50px 20px;
-  background:linear-gradient(120deg,#ff7eb3,#ff4d8d);
-  color:#fff;
-  border-radius:0 0 20px 20px;
-}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-.catalogo{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
+.hero{text-align:center;padding:50px 20px;background:linear-gradient(120deg,#ff7eb3,#ff4d8d);color:#fff;border-radius:0 0 20px 20px}
 
-.produto{
-  background:#fff;
-  border-radius:15px;
-  padding:10px;
-  text-align:center;
-  box-shadow:0 4px 10px rgba(0,0,0,.08)
-}
+.catalogo{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+
+.produto{background:#fff;border-radius:15px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08);transition:.2s;position:relative}
+.produto:active{transform:scale(0.97)}
 
 .produto img{width:100%;border-radius:10px}
 .preco{color:#ff4d8d;font-weight:bold;margin:5px 0}
 
-.btn{
-  background:#ff4d8d;
-  color:#fff;
-  padding:8px 12px;
-  border-radius:20px;
-  display:inline-block;
-  margin-top:5px;
-  cursor:pointer;
-  font-size:13px
-}
+.btn{background:#ff4d8d;color:#fff;padding:8px 12px;border-radius:20px;display:inline-block;margin-top:5px;cursor:pointer;font-size:13px;transition:.2s}
+.btn:active{transform:scale(0.9)}
 
-.carrinho{
-  position:fixed;
-  bottom:20px;
-  right:20px;
+/* animação bolinha */
+.bolinha{
+  position:absolute;
+  width:15px;height:15px;
   background:#25d366;
-  color:#fff;
-  padding:12px 15px;
-  border-radius:50px;
-  cursor:pointer;
-  font-size:14px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  border-radius:50%;
+  top:10px;left:10px;
+  animation:voar .6s forwards;
 }
 
-.modal{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:#fff;
-  padding:20px;
-  display:none;
-  overflow:auto
+@keyframes voar{
+  to{transform:translate(200px,-200px);opacity:0}
 }
 
-.item{display:flex;justify-content:space-between;margin-bottom:10px}
+.carrinho{position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;padding:12px 15px;border-radius:50px;cursor:pointer;font-size:14px;display:flex;flex-direction:column;align-items:center;box-shadow:0 5px 15px rgba(0,0,0,.2)}
+
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;padding:20px;display:none;overflow:auto;animation:fade .3s ease}
+
+.item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .remover{color:red;cursor:pointer}
 
-input,select,button{
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-  border-radius:10px;
-  border:1px solid #ddd
-}
+.qtd-box{display:flex;align-items:center;gap:5px}
+.qtd-btn{background:#ff4d8d;color:#fff;border:none;padding:3px 8px;border-radius:6px;cursor:pointer}
 
+input,select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px;border:1px solid #ddd}
 .total-geral{font-size:12px;margin-top:3px}
+
+.whats-btn{display:flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:12px;border-radius:12px;text-decoration:none;margin-top:10px;justify-content:center;font-weight:500}
+.whats-btn:active{transform:scale(0.95)}
 
 </style></head>
 <body><header>
@@ -138,14 +84,14 @@ input,select,button{
   <img src="logo.jpg">
   <h3>Batom</h3>
   <p class="preco">R$ 5,00</p>
-  <div class="btn" onclick="add('Batom',5)">Adicionar</div>
+  <div class="btn" onclick="add(event,'Batom',5)">Adicionar</div>
 </div>
 
 <div class="produto">
   <img src="logo.jpg">
   <h3>Gloss</h3>
   <p class="preco">R$ 10,00</p>
-  <div class="btn" onclick="add('Gloss',10)">Adicionar</div>
+  <div class="btn" onclick="add(event,'Gloss',10)">Adicionar</div>
 </div>
 
   </div>
@@ -154,7 +100,10 @@ input,select,button{
   <p><strong>Endereço:</strong> Rua das Violetas n°233, Itambé, Pernambuco, Brazil</p>
 </section><section id="contato">
   <h2>Contato</h2>
-  <p>📱 WhatsApp: 11 93910-2961</p>
+  <a class="whats-btn" href="https://wa.me/5511939102961" target="_blank">
+    <i data-lucide="message-circle"></i>
+    Falar no WhatsApp
+  </a>
 </section><div class="carrinho" onclick="abrirCarrinho()">
   🛒 <span id="qtd">0</span>
   <div class="total-geral">R$ <span id="totalBtn">0</span></div>
@@ -172,17 +121,26 @@ input,select,button{
   </select>  <input id="endereco" placeholder="Endereço (se for entrega)">  <p>Total: R$ <span id="total">0</span></p><button onclick="finalizar()">Finalizar Pedido</button> <button onclick="fecharCarrinho()">Fechar</button>
 
 </div><script>
+lucide.createIcons();
+
 let carrinho=[];
 
 function mostrar(sec){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
-
   document.getElementById(sec).classList.add('active');
   document.getElementById('btn-'+sec).classList.add('active');
 }
 
-function add(nome,preco){
+function animar(btn){
+  let bolinha=document.createElement('div');
+  bolinha.className='bolinha';
+  btn.parentElement.appendChild(bolinha);
+  setTimeout(()=>bolinha.remove(),600);
+}
+
+function add(e,nome,preco){
+  animar(e.target);
   let item=carrinho.find(i=>i.nome===nome);
   if(item){item.qtd++}else{carrinho.push({nome,preco,qtd:1})}
   update();
@@ -196,7 +154,16 @@ function update(){
 
   carrinho.forEach((i,index)=>{
     total+=i.preco*i.qtd;
-    lista.innerHTML+=`<div class="item">${i.nome} x${i.qtd} - R$${(i.preco*i.qtd).toFixed(2)} <span class="remover" onclick="remover(${index})">❌</span></div>`;
+    lista.innerHTML+=`<div class="item">
+      ${i.nome}
+      <div class="qtd-box">
+        <button class="qtd-btn" onclick="diminuir(${index})">-</button>
+        ${i.qtd}
+        <button class="qtd-btn" onclick="aumentar(${index})">+</button>
+      </div>
+      R$${(i.preco*i.qtd).toFixed(2)}
+      <span class="remover" onclick="remover(${index})">❌</span>
+    </div>`;
   });
 
   if(document.getElementById('tipo').value==='entrega') total+=2;
@@ -205,6 +172,8 @@ function update(){
   document.getElementById('totalBtn').innerText=total.toFixed(2);
 }
 
+function aumentar(i){carrinho[i].qtd++;update();}
+function diminuir(i){if(carrinho[i].qtd>1){carrinho[i].qtd--}else{carrinho.splice(i,1)}update();}
 function remover(i){carrinho.splice(i,1);update();}
 
 function abrirCarrinho(){document.getElementById('modal').style.display='block';update();}
