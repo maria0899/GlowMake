@@ -13,7 +13,8 @@ header{background:#fff;padding:10px 15px;display:flex;flex-direction:column;gap:
 .topo{display:flex;justify-content:space-between;align-items:center}
 header img{width:100px}
 
-.carrinho-top{background:#25d366;color:#fff;padding:8px 12px;border-radius:15px;font-size:12px;display:flex;flex-direction:column;align-items:center;cursor:pointer}
+.carrinho-top{background:linear-gradient(135deg,#25d366,#1da851);color:#fff;padding:10px 14px;border-radius:20px;font-size:12px;display:flex;flex-direction:column;align-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.15);transition:.2s}
+.carrinho-top:active{transform:scale(0.95)}
 
 nav{display:flex;gap:8px;overflow:auto}
 nav a{padding:8px 12px;border-radius:20px;text-decoration:none;color:#ff4d8d;font-weight:500;font-size:13px;background:#fff0f5;white-space:nowrap}
@@ -24,10 +25,15 @@ section{display:none;padding:20px}
 
 .hero{margin-top:10px;text-align:center;padding:50px 20px;background:linear-gradient(135deg,#ff7eb3,#ff4d8d);color:#fff;border-radius:25px}
 
-.info{margin-top:15px;background:#fff;padding:15px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,.05);font-size:14px}
+.info,.mvv{margin-top:15px;background:#fff;padding:15px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,.05);font-size:14px}
+.mvv h3{color:#ff4d8d;margin-top:10px}
 
-.mvv{margin-top:15px;background:#fff;padding:15px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,.05)}
-.mvv h3{margin-bottom:5px;color:#ff4d8d}
+.avaliacoes{margin-top:15px;background:#fff;padding:15px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,.05);animation:fade .6s}
+.avaliacoes h3{margin-bottom:10px;color:#ff4d8d}
+.review{font-size:13px;margin-bottom:8px;opacity:.9;animation:slideUp .5s ease}
+.review span{display:block}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 .catalogo{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
 .produto{background:#fff;border-radius:15px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
@@ -35,13 +41,25 @@ section{display:none;padding:20px}
 .preco{color:#ff4d8d;font-weight:bold;margin:5px 0}
 .btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;cursor:pointer}
 
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;padding:20px;display:none;overflow:auto}
-.item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.qtd-box{display:flex;gap:5px}
-.qtd-btn{background:#ff4d8d;color:#fff;border:none;padding:3px 8px;border-radius:5px}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#f9f9f9;padding:20px;display:none;overflow:auto}
 
-.resumo{background:#fff0f5;padding:10px;border-radius:10px;margin-top:10px}
-.total-final{font-weight:bold;font-size:18px;margin-top:5px}
+.item{background:#fff;padding:10px;border-radius:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+
+.qtd-box{display:flex;align-items:center;gap:6px}
+.qtd-btn{background:#ff4d8d;color:#fff;border:none;padding:4px 9px;border-radius:6px}
+
+.resumo{
+  position:sticky;
+  bottom:0;
+  background:#fff;
+  padding:15px;
+  border-radius:15px 15px 0 0;
+  box-shadow:0 -3px 10px rgba(0,0,0,.08);
+  margin-top:20px;
+}
+
+.resumo p{display:flex;justify-content:space-between;margin:5px 0}
+.total-final{font-weight:bold;font-size:18px}
 
 input,select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px;border:1px solid #ddd}
 
@@ -69,18 +87,25 @@ input,select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px;b
     📦 Retirada em loja disponível
   </div>  <div class="mvv">
     <h3>Missão</h3>
-    <p>Oferecer produtos de beleza acessíveis que elevem a autoestima de nossas clientes.</p><h3>Visão</h3>
-<p>Ser referência em beleza acessível e confiança no atendimento.</p>
+    <p>Oferecer produtos de beleza acessíveis que elevem a autoestima.</p><h3>Visão</h3>
+<p>Ser referência em beleza acessível.</p>
 
 <h3>Valores</h3>
-<p>Qualidade, confiança, autoestima e amor pela beleza.</p>
+<p>Qualidade, confiança e autoestima.</p>
 
+  </div>
+  <div class="avaliacoes">
+    <h3>⭐ Avaliações de Clientes</h3>
+    <div class="review">★★★★★ <span>“Perfeitos, amei demais 😍”</span> – Juliana</div>
+    <div class="review">★★★★★ <span>“Chegou rápido e bem embalado!”</span> – Camila</div>
+    <div class="review">★★★★★ <span>“Muito barato e de qualidade ❤️”</span> – Fernanda</div>
   </div>
 </section><section id="catalogo">
   <h2>Catálogo</h2>
   <div class="catalogo"><div class="produto">
   <img src="logo.jpg">
   <h3>Batom</h3>
+  <div style="font-size:12px;color:#f5a623">★★★★★ (32)</div>
   <p class="preco">R$ 5,00</p>
   <div class="btn" onclick="add('Batom',5)">🛍️ Comprar</div>
 </div>
@@ -88,6 +113,7 @@ input,select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px;b
 <div class="produto">
   <img src="logo.jpg">
   <h3>Gloss</h3>
+  <div style="font-size:12px;color:#f5a623">★★★★★ (18)</div>
   <p class="preco">R$ 10,00</p>
   <div class="btn" onclick="add('Gloss',10)">🛍️ Comprar</div>
 </div>
@@ -104,11 +130,7 @@ input,select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px;b
   </a>
 </section><div class="modal" id="modal">
   <h2>Seu Carrinho</h2>
-  <div id="lista"></div>  <div class="resumo">
-    <p>Subtotal: R$ <span id="subtotal">0</span></p>
-    <p>Frete: R$ <span id="frete">0</span></p>
-    <p class="total-final">Total: R$ <span id="total">0</span></p>
-  </div>  <input id="nomeCliente" placeholder="Seu nome">  <select id="pagamento">
+  <div id="lista"></div>  <input id="nomeCliente" placeholder="Seu nome">  <select id="pagamento">
     <option>Forma de pagamento</option>
     <option>Pix</option>
     <option>Crédito</option>
@@ -116,8 +138,14 @@ input,select,button{width:100%;margin-top:10px;padding:10px;border-radius:10px;b
   </select>  <select id="tipo" onchange="update()">
     <option>Entrega ou retirada</option>
     <option value="retirada">Retirar na loja</option>
-    <option value="entrega">Entrega (+2)</option>
-  </select>  <input id="endereco" placeholder="Endereço (se for entrega)"><button onclick="finalizar()">Finalizar Pedido</button> <button onclick="fecharCarrinho()">Fechar</button>
+    <option value="entrega">Entrega</option>
+  </select>  <input id="endereco" placeholder="Endereço (se for entrega)">  <div class="resumo">
+    <p><span>Subtotal</span><span>R$ <span id="subtotal">0</span></span></p>
+    <p><span>Frete</span><span>R$ <span id="frete">0</span></span></p>
+    <p class="total-final"><span>Total</span><span>R$ <span id="total">0</span></span></p><div style="font-size:12px;margin-bottom:8px;color:#555">💖 Mais de 100 clientes satisfeitas</div>
+<button onclick="finalizar()">Finalizar Pedido</button>
+
+  </div><button onclick="fecharCarrinho()">Fechar</button>
 
 </div><script>
 lucide.createIcons();
