@@ -51,7 +51,7 @@ section{display:none;padding:20px}
 .produto{background:#fff;border-radius:15px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
 .produto img{width:100%;border-radius:10px}
 .preco{color:#ff4d8d;font-weight:bold}
-.btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;margin-top:5px}
+.btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;margin-top:5px;cursor:pointer}
 
 /* MODAL */
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#f9f9f9;padding:20px;display:none;overflow:auto;z-index:2000}
@@ -76,6 +76,7 @@ section{display:none;padding:20px}
   width:28px;
   height:28px;
   border-radius:8px;
+  cursor:pointer;
 }
 
 /* INPUTS */
@@ -130,7 +131,7 @@ input,select{
 <img src="logo.jpg">
 
 <div class="carrinho-top" onclick="abrirCarrinho()">
-🛒 <span id="qtd">0</span><br>R$ <span id="totalBtn">0</span>
+🛒 <span id="qtd">0</span><br>R$ <span id="totalBtn">0.00</span>
 </div>
 </div>
 
@@ -169,21 +170,21 @@ input,select{
 
 <div class="produto">
 <img src="imagens/Gloss_Labial_MaxLove.jpg">
-<h3>Gloss Labial - MaxLove</h3>
+<h3>Gloss Labial MaxLove</h3>
 <p class="preco">R$10,00</p>
-<div class="btn" onclick="add('Gloss MaxLove',10)">Comprar</div>
+<div class="btn" onclick="add('Gloss Labial MaxLove',10)">Comprar</div>
 </div>
 
 <div class="produto">
 <img src="imagens/Primer_MaxLove.jpg">
-<h3>Primer - MaxLove</h3>
+<h3>Primer MaxLove</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Primer MaxLove',10)">Comprar</div>
 </div>
 
 <div class="produto">
 <img src="imagens/blush_liquido_hudabeaty.jpg">
-<h3>Blush Líquido - HudaBeauty</h3>
+<h3>Blush Líquido HudaBeauty</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Blush Líquido HudaBeauty',10)">Comprar</div>
 </div>
@@ -215,7 +216,7 @@ input,select{
 <option>Dinheiro</option>
 </select>
 
-<select id="tipo">
+<select id="tipo" onchange="update()">
 <option value="">Entrega ou retirada</option>
 <option value="retirada">Retirada</option>
 <option value="entrega">Entrega</option>
@@ -224,9 +225,9 @@ input,select{
 <input id="endereco" placeholder="Endereço">
 
 <div class="resumo">
-<p>Subtotal: R$ <span id="subtotal">0</span></p>
-<p>Frete: R$ <span id="frete">0</span></p>
-<p class="total-final">Total: R$ <span id="total">0</span></p>
+<p>Subtotal: R$ <span id="subtotal">0.00</span></p>
+<p>Frete: R$ <span id="frete">0.00</span></p>
+<p class="total-final">Total: R$ <span id="total">0.00</span></p>
 <button class="finalizar" onclick="finalizar()">Finalizar Pedido</button>
 </div>
 
@@ -270,7 +271,8 @@ ${i.qtd}
 </div>`;
 });
 
-let frete=document.getElementById('tipo').value==='entrega'?2:0;
+let tipo=document.getElementById('tipo').value;
+let frete=tipo==='entrega'?2:0;
 let total=subtotal+frete;
 
 document.getElementById('subtotal').innerText=subtotal.toFixed(2);
@@ -292,22 +294,26 @@ let pagamento=document.getElementById('pagamento').value;
 let tipo=document.getElementById('tipo').value;
 let endereco=document.getElementById('endereco').value;
 
-let texto='Olá! Pedido Glow Make 💖%0A%0A';
+let texto='🛍️ Pedido Glow Make 💖%0A%0A';
 texto+=`👤 Nome: ${nome}%0A%0A`;
-texto+='🛍️ Itens:%0A';
 
-let total=0;
+texto+='📦 Itens:%0A';
+
+let subtotal=0;
 
 carrinho.forEach(i=>{
 texto+=`• ${i.nome} x${i.qtd}%0A`;
-total+=i.preco*i.qtd;
+subtotal+=i.preco*i.qtd;
 });
 
 let frete=tipo==='entrega'?2:0;
-total+=frete;
+let total=subtotal+frete;
 
-texto+=`%0A💰 Total: R$${total.toFixed(2)}%0A`;
-texto+=`💳 Pagamento: ${pagamento}%0A`;
+texto+=`%0A💰 Subtotal: R$${subtotal.toFixed(2)}%0A`;
+texto+=`🚚 Frete: R$${frete.toFixed(2)}%0A`;
+texto+=`💵 Total: R$${total.toFixed(2)}%0A`;
+
+texto+=`%0A💳 Pagamento: ${pagamento}%0A`;
 texto+=`📦 Tipo: ${tipo}%0A`;
 
 if(tipo==='entrega'){
