@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glow Make</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -12,77 +13,69 @@
 body{font-family:'Poppins',sans-serif;background:#f6f6f6}
 
 /* HEADER */
-header{background:#fff;padding:10px 15px;display:flex;flex-direction:column;gap:10px;box-shadow:0 2px 10px rgba(0,0,0,.05);position:sticky;top:0;z-index:1000}
+header{background:#fff;padding:10px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
 .topo{display:flex;justify-content:space-between;align-items:center}
 header img{width:100px}
 
-/* Carrinho fixo */
+/* CARRINHO FIXO */
 .carrinho-top{
+  position:fixed;
+  top:15px;
+  right:15px;
   background:linear-gradient(135deg,#25d366,#1da851);
   color:#fff;
-  padding:10px;
-  border-radius:20px;
-  font-size:12px;
-  position:fixed;
-  top:10px;
-  right:10px;
-  width:80px;
+  padding:12px;
+  border-radius:15px;
   text-align:center;
+  width:85px;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
   cursor:pointer;
-  box-shadow:0 4px 10px rgba(0,0,0,.2);
+  z-index:1000;
 }
 
 /* NAV */
-nav{display:flex;gap:8px;overflow:auto;margin-top:70px}
-nav a{padding:8px 12px;border-radius:20px;text-decoration:none;color:#ff4d8d;font-weight:500;font-size:13px;background:#fff0f5}
+nav{display:flex;gap:8px;overflow:auto;margin-top:10px}
+nav a{padding:8px 12px;border-radius:20px;background:#ffe4ee;color:#ff4d8d;cursor:pointer}
 nav a.active{background:#ff4d8d;color:#fff}
 
-section{display:none;padding:20px;margin-top:50px}
+/* SEÇÕES */
+section{display:none;padding:20px}
 .active{display:block}
 
 /* HOME */
 .hero{text-align:center;padding:40px;background:linear-gradient(135deg,#ff7eb3,#ff4d8d);color:#fff;border-radius:25px}
-
-.info,.mvv,.avaliacoes{
-  margin-top:15px;
-  background:#fff;
-  padding:15px;
-  border-radius:15px;
-  box-shadow:0 4px 10px rgba(0,0,0,.05)
-}
+.box{margin-top:15px;background:#fff;padding:15px;border-radius:15px}
 
 /* CATÁLOGO */
 .catalogo{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
 .produto{background:#fff;border-radius:15px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
 .produto img{width:100%;border-radius:10px}
 .preco{color:#ff4d8d;font-weight:bold}
-.btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;margin-top:5px;cursor:pointer}
+.btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;margin-top:5px}
 
 /* MODAL */
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#f9f9f9;padding:20px;display:none;overflow:auto}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#f9f9f9;padding:20px;display:none;overflow:auto;z-index:2000}
 
 /* ITENS */
 .item{
   background:#fff;
   padding:15px;
   border-radius:16px;
-  margin-bottom:12px;
+  margin-bottom:10px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   box-shadow:0 6px 15px rgba(0,0,0,.06);
 }
 
-.qtd-box{display:flex;align-items:center;gap:8px}
-
+.qtd-box{display:flex;gap:8px}
 .qtd-btn{
-  background:linear-gradient(135deg,#ff7eb3,#ff4d8d);
+  background:#ff4d8d;
   color:#fff;
   border:none;
   width:28px;
   height:28px;
   border-radius:8px;
-  cursor:pointer;
 }
 
 /* INPUTS */
@@ -96,28 +89,26 @@ input,select{
 
 /* RESUMO */
 .resumo{
-  position:sticky;
-  bottom:0;
+  margin-top:15px;
   background:#fff;
-  padding:18px;
-  border-radius:20px;
-  box-shadow:0 -5px 15px rgba(0,0,0,.08);
+  padding:15px;
+  border-radius:15px;
 }
-
-.total-final{font-size:20px;font-weight:bold}
+.total-final{font-weight:bold;font-size:18px}
 
 /* BOTÃO FINALIZAR */
-.resumo button{
+.finalizar{
   background:linear-gradient(135deg,#25d366,#1da851);
   color:#fff;
   padding:14px;
   border:none;
   border-radius:12px;
   margin-top:10px;
+  width:100%;
 }
 
 /* CONTATO */
-.whats-btn,.instagram-btn{
+.btn-contato{
   display:flex;
   justify-content:center;
   gap:10px;
@@ -127,8 +118,8 @@ input,select{
   color:#fff;
   text-decoration:none;
 }
-.whats-btn{background:#25d366}
-.instagram-btn{background:#E4405F}
+.whats{background:#25d366}
+.insta{background:#E4405F}
 </style>
 </head>
 
@@ -137,6 +128,7 @@ input,select{
 <header>
 <div class="topo">
 <img src="logo.jpg">
+
 <div class="carrinho-top" onclick="abrirCarrinho()">
 🛒 <span id="qtd">0</span><br>R$ <span id="totalBtn">0</span>
 </div>
@@ -151,18 +143,24 @@ input,select{
 </header>
 
 <section id="inicio" class="active">
-<div class="hero"><h2>Glow Make ✨</h2></div>
-
-<div class="mvv">
-<h3>Missão</h3><p>Elevar autoestima.</p>
-<h3>Visão</h3><p>Ser referência.</p>
-<h3>Valores</h3><p>Qualidade e confiança.</p>
+<div class="hero">
+<h2>Glow Make ✨</h2>
+<p>Beleza e brilho para você</p>
 </div>
 
-<div class="avaliacoes">
+<div class="box">
+<h3>Missão</h3>
+<p>Elevar a autoestima.</p>
+<h3>Visão</h3>
+<p>Ser referência em beleza.</p>
+<h3>Valores</h3>
+<p>Qualidade e confiança.</p>
+</div>
+
+<div class="box">
 <h3>⭐ Avaliações</h3>
-<p>★★★★★ “Perfeito!” – Juliana</p>
-<p>★★★★★ “Amei!” – Camila</p>
+<p>★★★★★ “Perfeito!”</p>
+<p>★★★★★ “Amei demais!”</p>
 </div>
 </section>
 
@@ -171,53 +169,78 @@ input,select{
 
 <div class="produto">
 <img src="imagens/Gloss_Labial_MaxLove.jpg">
-<h3>Gloss</h3>
+<h3>Gloss MaxLove</h3>
 <p class="preco">R$10,00</p>
-<div class="btn" onclick="add('Gloss Labial - Max Love',10)">Comprar</div>
+<div class="btn" onclick="add('Gloss MaxLove',10)">Comprar</div>
 </div>
 
 <div class="produto">
 <img src="imagens/Primer_MaxLove.jpg">
-<h3>Primer</h3>
+<h3>Primer MaxLove</h3>
 <p class="preco">R$10,00</p>
-<div class="btn" onclick="add('Primer - Max Love',10)">Comprar</div>
+<div class="btn" onclick="add('Primer MaxLove',10)">Comprar</div>
 </div>
 
 <div class="produto">
-<img src="imagens/blush_liquido_hudabeauty.jpg">
-<h3>Blush</h3>
+<img src="imagens/blush-liquido_hudabeaty.jpg">
+<h3>Blush Líquido HudaBeauty</h3>
 <p class="preco">R$10,00</p>
-<div class="btn" onclick="add('Blush Líquido - HudaBeauty',10)">Comprar</div>
+<div class="btn" onclick="add('Blush Líquido HudaBeauty',10)">Comprar</div>
 </div>
 
 </div>
 </section>
 
 <section id="contato">
-<a class="whats-btn" href="https://wa.me/5511939102961">WhatsApp</a>
-<a class="instagram-btn" href="https://www.instagram.com/glowmakee10">Instagram</a>
+<a class="btn-contato whats" href="https://wa.me/5511939102961">
+<i data-lucide="message-circle"></i> WhatsApp
+</a>
+
+<a class="btn-contato insta" href="https://www.instagram.com/glowmakee10">
+<i data-lucide="instagram"></i> Instagram
+</a>
 </section>
 
 <div class="modal" id="modal">
 <h2>Seu Carrinho</h2>
+
 <div id="lista"></div>
 
 <input id="nomeCliente" placeholder="Seu nome">
 
+<select id="pagamento">
+<option>Forma de pagamento</option>
+<option>Pix</option>
+<option>Cartão</option>
+<option>Dinheiro</option>
+</select>
+
+<select id="tipo">
+<option value="">Entrega ou retirada</option>
+<option value="retirada">Retirada</option>
+<option value="entrega">Entrega</option>
+</select>
+
+<input id="endereco" placeholder="Endereço">
+
 <div class="resumo">
-<p>Total: R$ <span id="total">0</span></p>
-<button onclick="finalizar()">Finalizar Pedido</button>
+<p>Subtotal: R$ <span id="subtotal">0</span></p>
+<p>Frete: R$ <span id="frete">0</span></p>
+<p class="total-final">Total: R$ <span id="total">0</span></p>
+<button class="finalizar" onclick="finalizar()">Finalizar Pedido</button>
 </div>
 
 <button onclick="fecharCarrinho()">Fechar</button>
 </div>
 
 <script>
+lucide.createIcons();
+
 let carrinho=[];
 
-function mostrar(id){
+function mostrar(sec){
 document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
+document.getElementById(sec).classList.add('active');
 }
 
 function add(nome,preco){
@@ -229,11 +252,11 @@ update();
 function update(){
 let lista=document.getElementById('lista');
 lista.innerHTML='';
-let total=0;
+let subtotal=0;
 let qtd=0;
 
 carrinho.forEach((i,index)=>{
-total+=i.preco*i.qtd;
+subtotal+=i.preco*i.qtd;
 qtd+=i.qtd;
 
 lista.innerHTML+=`
@@ -247,20 +270,53 @@ ${i.qtd}
 </div>`;
 });
 
-document.getElementById('total').innerText=total;
-document.getElementById('totalBtn').innerText=total;
+let frete=document.getElementById('tipo').value==='entrega'?2:0;
+let total=subtotal+frete;
+
+document.getElementById('subtotal').innerText=subtotal.toFixed(2);
+document.getElementById('frete').innerText=frete.toFixed(2);
+document.getElementById('total').innerText=total.toFixed(2);
+document.getElementById('totalBtn').innerText=total.toFixed(2);
 document.getElementById('qtd').innerText=qtd;
 }
 
 function aumentar(i){carrinho[i].qtd++;update();}
-function diminuir(i){carrinho[i].qtd--;if(carrinho[i].qtd<=0)carrinho.splice(i,1);update();}
+function diminuir(i){if(carrinho[i].qtd>1){carrinho[i].qtd--}else{carrinho.splice(i,1)}update();}
 
-function abrirCarrinho(){modal.style.display='block'}
-function fecharCarrinho(){modal.style.display='none'}
+function abrirCarrinho(){modal.style.display='block';update();}
+function fecharCarrinho(){modal.style.display='none';}
 
 function finalizar(){
 let nome=document.getElementById('nomeCliente').value||'Cliente';
-window.open(`https://wa.me/5511939102961?text=Pedido de ${nome}`);
+let pagamento=document.getElementById('pagamento').value;
+let tipo=document.getElementById('tipo').value;
+let endereco=document.getElementById('endereco').value;
+
+let texto='Olá! Pedido Glow Make 💖%0A%0A';
+texto+=`👤 Nome: ${nome}%0A%0A`;
+texto+='🛍️ Itens:%0A';
+
+let total=0;
+
+carrinho.forEach(i=>{
+texto+=`• ${i.nome} x${i.qtd}%0A`;
+total+=i.preco*i.qtd;
+});
+
+let frete=tipo==='entrega'?2:0;
+total+=frete;
+
+texto+=`%0A💰 Total: R$${total.toFixed(2)}%0A`;
+texto+=`💳 Pagamento: ${pagamento}%0A`;
+texto+=`📦 Tipo: ${tipo}%0A`;
+
+if(tipo==='entrega'){
+texto+=`📍 Endereço: ${endereco}%0A`;
+}
+
+texto+='%0A✨ Aguardo confirmação!';
+
+window.open('https://wa.me/5511939102961?text='+texto);
 }
 </script>
 
