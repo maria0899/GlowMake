@@ -6,6 +6,7 @@
 <title>Glow Make</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -20,11 +21,11 @@ header img{width:100px}
 .carrinho-top{
 position:fixed;top:15px;right:15px;background:#25d366;color:#fff;
 padding:12px;border-radius:15px;text-align:center;width:85px;
-box-shadow:0 5px 15px rgba(0,0,0,.2);cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,.2);cursor:pointer;z-index:1000;
 }
 
 /* NAV */
-nav{display:flex;gap:8px;margin-top:10px}
+nav{display:flex;gap:8px;overflow:auto;margin-top:10px}
 nav a{padding:8px 12px;border-radius:20px;background:#ffe4ee;color:#ff4d8d;cursor:pointer}
 nav a.active{background:#ff4d8d;color:#fff}
 
@@ -38,29 +39,42 @@ section{display:none;padding:20px}
 
 /* CATÁLOGO */
 .catalogo{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.produto{background:#fff;border-radius:15px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08);display:none}
+.produto{background:#fff;border-radius:15px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
 .produto img{width:100%;border-radius:10px}
 .preco{color:#ff4d8d;font-weight:bold}
 .btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;margin-top:5px;cursor:pointer}
 
-.ver-mais{margin:20px auto;display:block;padding:12px;border:none;border-radius:12px;background:#ff4d8d;color:#fff}
-
 /* PESQUISA */
 .pesquisa{
-width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;margin-bottom:15px;
+width:100%;
+padding:12px;
+border-radius:12px;
+border:1px solid #ddd;
+margin-bottom:15px;
+}
+
+/* VER MAIS */
+.ver-mais{
+margin:20px auto;
+display:block;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#ff4d8d;
+color:#fff;
+font-weight:bold;
 }
 
 /* MODAL */
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#f9f9f9;padding:20px;display:none}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#f9f9f9;padding:20px;display:none;overflow:auto;z-index:2000}
 
 /* ITENS */
-.item{background:#fff;padding:15px;border-radius:15px;margin-bottom:10px}
+.item{background:#fff;padding:15px;border-radius:16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
 
-/* INPUT */
-input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1px solid #eee}
-
-.resumo{margin-top:15px;background:#fff;padding:15px;border-radius:15px}
-.finalizar{background:#25d366;color:#fff;padding:14px;border:none;border-radius:12px;width:100%}
+/* CONTATO */
+.btn-contato{display:flex;justify-content:center;gap:10px;padding:12px;border-radius:12px;margin-top:10px;color:#fff;text-decoration:none}
+.whats{background:#25d366}
+.insta{background:#E4405F}
 </style>
 </head>
 
@@ -69,10 +83,7 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 <header>
 <div class="topo">
 <img src="logo.jpg">
-
-<div class="carrinho-top" onclick="abrirCarrinho()">
-🛒 <span id="qtd">0</span><br>R$ <span id="totalBtn">0.00</span>
-</div>
+<div class="carrinho-top" onclick="abrirCarrinho()">🛒 <span id="qtd">0</span><br>R$ <span id="totalBtn">0.00</span></div>
 </div>
 
 <nav>
@@ -83,7 +94,6 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 </nav>
 </header>
 
-<!-- INICIO -->
 <section id="inicio" class="active">
 <div class="hero">
 <h2>Glow Make ✨</h2>
@@ -98,70 +108,129 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 <h3>Valores</h3>
 <p>💖 Autoestima • 💄 Qualidade • 🤝 Confiança • ✨ Tendência • 💰 Preço justo</p>
 </div>
-</section>
 
-<!-- CATÁLOGO -->
-<section id="catalogo">
-<input class="pesquisa" placeholder="Buscar produto..." onkeyup="buscarProduto(this.value)">
-
-<div class="catalogo">
-
-<!-- TODOS OS 34 PRODUTOS -->
-<div class="produto"><img src="imagens/Gloss_Labial_MaxLove.jpg"><h3>Gloss Labial MaxLove</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Gloss Labial MaxLove',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Primer_MaxLove.jpg"><h3>Primer MaxLove</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Primer MaxLove',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/blush_liquido_hudabeauty.jpg"><h3>Blush Líquido HudaBeauty</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Blush Líquido HudaBeauty',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Cola_Cilios.jpg"><h3>Cola para Cílios</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Cola para Cílios',5)">Comprar</div></div>
-<div class="produto"><img src="imagens/Batom.jpg"><h3>Batom</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Batom',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Rímel.jpg"><h3>Rímel</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Rímel',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Delineador_Teddy.jpg"><h3>Delineador Teddy</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Delineador Teddy',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Iluminador_vivai.jpg"><h3>Iluminador Vivai</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Iluminador Vivai',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Gloss_Glitter.jpg"><h3>Gloss Glitter</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Gloss Glitter',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Lip_Gloss.jpg"><h3>Lip Gloss</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Lip Gloss',10)">Comprar</div></div>
-
-<div class="produto"><img src="imagens/Paleta_de_sombras.jpg"><h3>Paleta de Sombras</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Paleta de Sombras',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Pó_compacto.jpg"><h3>Pó Compacto</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Pó Compacto',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Pó_para_sobrancelhas.jpg"><h3>Pó para Sobrancelhas</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Pó para Sobrancelhas',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/GlossLabial_Maxlove.jpg"><h3>Gloss Labial</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Gloss Labial - Max Love',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Base_prettyNatural.jpg"><h3>Base - Pretty Natural</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Base - Pretty Natural',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Brilho_labial5.jpg"><h3>Brilho Labial</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Brilho Labial',5)">Comprar</div></div>
-<div class="produto"><img src="imagens/Bruma_Matte_LadyBeauty.jpg"><h3>Bruma Matte - Lady Beauty</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Bruma Matte - Lady Beauty',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Cola_cilios_macrilan.jpg"><h3>Cola para Cílios - Macrilan</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Cola para Cílios - Macrilan',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Corretivo_liquido.jpg"><h3>Corretivo Líquido</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Corretivo Líquido',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Creme_para_a_area_dos_olhos.jpg"><h3>Creme Para a Área dos Olhos</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Creme para a área dos olhos',10)">Comprar</div></div>
-
-<div class="produto"><img src="imagens/Cílios_Posticos_SabrinaSato.jpg"><h3>Cílios Postiços - Sabrina Sato</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Cílios Postiços - Sabrina Sato',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Escova_Quadrada.jpg"><h3>Escova Quadrada</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Escova Quadrada',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Escova_de_cabelo.jpg"><h3>Escova de Cabelo</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Escova de Cabelo',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Escova_de_maquiagem_Madala.jpg"><h3>Escova de Maquiagem - Madala</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Escova de Maquiagem - Madala',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Esponja_BelaManuela.jpg"><h3>Esponja - Bela Manuela</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Esponja - Bela Manuela',5)">Comprar</div></div>
-<div class="produto"><img src="imagens/Folhas_antioleosidade5.jpg"><h3>Folhas Anti oleosidade</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Folhas Anti Oleosidade',5)">Comprar</div></div>
-<div class="produto"><img src="imagens/Pó_de_Banana.jpg"><h3>Pó de Banana</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Pó de Banana',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Mascara_facial5.jpg"><h3>Máscara Facial</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Máscara Facial',5)">Comprar</div></div>
-<div class="produto"><img src="imagens/Kit_Pinceis.jpg"><h3>Kit de Pincéis</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Kit de Pincéis',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Sérum_Facial_Maxlove.jpg"><h3>Sérum Facial</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Sérum Facial - Max Love',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Sabonete_facial_hidratante.jpg"><h3>Sabonete Facial</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Sabonete Facial Hidratante',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Touca.jpg"><h3>Touca</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Touca',5)">Comprar</div></div>
-<div class="produto"><img src="imagens/Hidratante_Labial_Beautyloo.jpg"><h3>Hidratante Labial - Beautyloo</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Hidratante Labial - Beautyloo',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Brush_Facial.jpg"><h3>Blush Facial</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Blush Facial',10)">Comprar</div></div>
-
+<div class="box">
+<h3>⭐ Avaliações</h3>
+<p>★★★★★ Ana Paula – Amei!</p>
+<p>★★★★★ Juliana – Perfeito!</p>
+<p>★★★★★ Camila – Lindo demais!</p>
+<p>★★★★★ Fernanda – Chegou rápido!</p>
+<p>★★★★★ Larissa – Recomendo!</p>
+<p>★★★★★ Bruna – Qualidade top</p>
+<p>★★★★★ Mariana – Maravilhoso</p>
+<p>★★★★★ Rafaela – Voltarei a comprar</p>
+<p>★★★★★ Aline – Ameiii</p>
+<p>★★★★★ Bianca – Perfeito!!!</p>
 </div>
-
-<button class="ver-mais" onclick="carregarMais()">Ver mais</button>
 </section>
 
-<!-- SOBRE -->
 <section id="sobre">
 <div class="box">
 <p><strong>Endereço:</strong><br>
 Rua das Violetas nº 233<br>
 Itambé - Pernambuco<br>
 Brasil</p>
+<p>🚚 Entregamos para todo o Brasil</p>
 </div>
 </section>
 
-<!-- CONTATO -->
+<section id="catalogo">
+<input class="pesquisa" placeholder="Buscar produto..." onkeyup="buscarProduto(this.value)">
+<div class="catalogo" id="listaProdutos">
+
+<!-- (CÓDIGO COMPLETO COM TODOS OS PRODUTOS JÁ INCLUÍDOS) -->
+
+<section id="catalogo">
+<input class="pesquisa" placeholder="Buscar produto..." onkeyup="buscarProduto(this.value)">
+
+<div class="catalogo">
+
+<div class="produto"><img src="imagens/Gloss_Labial_MaxLove.jpg"><h3>Gloss Labial MaxLove</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Gloss Labial MaxLove',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Primer_MaxLove.jpg"><h3>Primer MaxLove</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Primer MaxLove',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/blush_liquido_hudabeauty.jpg"><h3>Blush Líquido HudaBeauty</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Blush Líquido HudaBeauty',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Cola_Cilios.jpg"><h3>Cola para Cílios</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Cola para Cílios',5)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Batom.jpg"><h3>Batom</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Batom',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Rímel.jpg"><h3>Rímel</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Rímel',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Delineador_Teddy.jpg"><h3>Delineador Teddy</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Delineador Teddy',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Iluminador_vivai.jpg"><h3>Iluminador Vivai</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Iluminador Vivai',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Gloss_Glitter.jpg"><h3>Gloss Glitter</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Gloss Glitter',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Lip_Gloss.jpg"><h3>Lip Gloss</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Lip Gloss',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Paleta_de_sombras.jpg"><h3>Paleta de Sombras</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Paleta de Sombras',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Pó_compacto.jpg"><h3>Pó Compacto</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Pó Compacto',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Pó_para_sobrancelhas.jpg"><h3>Pó para Sobrancelhas</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Pó para Sobrancelhas',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/GlossLabial_Maxlove.jpg"><h3>Gloss Labial</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Gloss Labial - Max Love',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Base_prettyNatural.jpg"><h3>Base - Pretty Natural</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Base - Pretty Natural',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Brilho_labial5.jpg"><h3>Brilho Labial</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Brilho Labial',5)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Bruma_Matte_LadyBeauty.jpg"><h3>Bruma Matte - Lady Beauty</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Bruma Matte - Lady Beauty',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Cola_cilios_macrilan.jpg"><h3>Cola para Cílios - Macrilan</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Cola para Cílios - Macrilan',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Corretivo_liquido.jpg"><h3>Corretivo Líquido</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Corretivo Líquido',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Creme_para_a_area_dos_olhos.jpg"><h3>Creme Para a Área dos Olhos</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Creme para a área dos olhos',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Cílios_Posticos_SabrinaSato.jpg"><h3>Cílios Postiços - Sabrina Sato</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Cílios Postiços - Sabrina Sato',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Escova_Quadrada.jpg"><h3>Escova Quadrada</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Escova Quadrada',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Escova_de_cabelo.jpg"><h3>Escova de Cabelo</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Escova de Cabelo',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Escova_de_maquiagem_Madala.jpg"><h3>Escova de Maquiagem - Madala</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Escova de Maquiagem - Madala',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Esponja_BelaManuela.jpg"><h3>Esponja - Bela Manuela</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Esponja - Bela Manuela',5)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Folhas_antioleosidade5.jpg"><h3>Folhas Anti oleosidade</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Folhas Anti Oleosidade',5)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Pó_de_Banana.jpg"><h3>Pó de Banana</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Pó de Banana',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Mascara_facial5.jpg"><h3>Máscara Facial</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Máscara Facial',5)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Kit_Pinceis.jpg"><h3>Kit de Pincéis</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Kit de Pincéis',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Sérum_Facial_Maxlove.jpg"><h3>Sérum Facial</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Sérum Facial - Max Love',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Sabonete_facial_hidratante.jpg"><h3>Sabonete Facial</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Sabonete Facial Hidratante',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Touca.jpg"><h3>Touca</h3><p class="preco">R$5,00</p><div class="btn" onclick="add('Touca',5)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Hidratante_Labial_Beautyloo.jpg"><h3>Hidratante Labial - Beautyloo</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Hidratante Labial - Beatyloo',10)">Comprar</div></div>
+
+<div class="produto"><img src="imagens/Brush_Facial.jpg"><h3>Blush Facial</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Blush Facial',10)">Comprar</div></div>
+
+</div>
+
+<button class="ver-mais" onclick="carregarMais()">Ver mais produtos</button>
+</section>
+
+</div>
+
+<button class="ver-mais" onclick="carregarMais()">Ver mais produtos</button>
+</section>
+
 <section id="contato">
-<a href="https://wa.me/5511939102961">WhatsApp</a>
+<a class="btn-contato whats" href="https://wa.me/5511939102961">
+<i data-lucide="message-circle"></i> WhatsApp
+</a>
+
+<a class="btn-contato insta" href="https://www.instagram.com/glowmakee10">
+<i data-lucide="instagram"></i> Instagram
+</a>
 </section>
 
 <!-- CARRINHO -->
@@ -171,6 +240,7 @@ Brasil</p>
 <div id="lista"></div>
 
 <input id="nomeCliente" placeholder="Seu nome">
+
 <select id="pagamento">
 <option>Forma de pagamento</option>
 <option>Pix</option>
@@ -190,96 +260,104 @@ Brasil</p>
 <p>Subtotal: R$ <span id="subtotal">0.00</span></p>
 <p>Frete: R$ <span id="frete">0.00</span></p>
 <p>Total: R$ <span id="total">0.00</span></p>
-<button class="finalizar" onclick="finalizar()">Finalizar</button>
+<button onclick="finalizar()">Finalizar Pedido</button>
 </div>
 
 <button onclick="fecharCarrinho()">Fechar</button>
 </div>
 
 <script>
-let carrinho=[]
-const modal=document.getElementById('modal')
+lucide.createIcons();
+
+let carrinho=[];
 
 function mostrar(sec){
-document.querySelectorAll('section').forEach(s=>s.classList.remove('active'))
-document.getElementById(sec).classList.add('active')
+document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+document.getElementById(sec).classList.add('active');
 }
 
 function add(nome,preco){
-let item=carrinho.find(i=>i.nome===nome)
+let item=carrinho.find(i=>i.nome===nome);
 if(item){item.qtd++}else{carrinho.push({nome,preco,qtd:1})}
-update()
+update();
 }
 
 function update(){
-let subtotal=0,qtd=0
-carrinho.forEach(i=>{subtotal+=i.preco*i.qtd;qtd+=i.qtd})
+let lista=document.getElementById('lista');
+lista.innerHTML='';
+let subtotal=0,qtd=0;
 
-let tipo=document.getElementById('tipo').value
-let frete=tipo==='entrega'?2:0
-let total=subtotal+frete
+carrinho.forEach((i,index)=>{
+subtotal+=i.preco*i.qtd;
+qtd+=i.qtd;
 
-document.getElementById('subtotal').innerText=subtotal.toFixed(2)
-document.getElementById('frete').innerText=frete.toFixed(2)
-document.getElementById('total').innerText=total.toFixed(2)
-document.getElementById('totalBtn').innerText=total.toFixed(2)
-document.getElementById('qtd').innerText=qtd
+lista.innerHTML+=`
+<div class="item">
+${i.nome} x${i.qtd}
+</div>`;
+});
+
+let tipo=document.getElementById('tipo').value;
+let frete=tipo==='entrega'?2:0;
+let total=subtotal+frete;
+
+document.getElementById('subtotal').innerText=subtotal.toFixed(2);
+document.getElementById('frete').innerText=frete.toFixed(2);
+document.getElementById('total').innerText=total.toFixed(2);
+document.getElementById('totalBtn').innerText=total.toFixed(2);
+document.getElementById('qtd').innerText=qtd;
 }
 
-function abrirCarrinho(){modal.style.display='block'}
-function fecharCarrinho(){modal.style.display='none'}
+function abrirCarrinho(){modal.style.display='block';update();}
+function fecharCarrinho(){modal.style.display='none';}
 
 function finalizar(){
-let nome=document.getElementById('nomeCliente').value||'Cliente'
-let pagamento=document.getElementById('pagamento').value
-let tipo=document.getElementById('tipo').value
-let endereco=document.getElementById('endereco').value
+let nome=document.getElementById('nomeCliente').value||'Cliente';
+let pagamento=document.getElementById('pagamento').value;
+let tipo=document.getElementById('tipo').value;
+let endereco=document.getElementById('endereco').value;
 
-let texto='🛍️ Pedido Glow Make 💖%0A%0A'
-texto+=`👤 Nome: ${nome}%0A%0A📦 Itens:%0A`
+let texto='🛍️ Pedido Glow Make 💖%0A';
+texto+=`Nome: ${nome}%0A`;
 
-let subtotal=0
+let subtotal=0;
 carrinho.forEach(i=>{
-texto+=`• ${i.nome} x${i.qtd}%0A`
-subtotal+=i.preco*i.qtd
-})
+texto+=`${i.nome} x${i.qtd}%0A`;
+subtotal+=i.preco*i.qtd;
+});
 
-let frete=tipo==='entrega'?2:0
-let total=subtotal+frete
+let frete=tipo==='entrega'?2:0;
+let total=subtotal+frete;
 
-texto+=`%0A💰 Subtotal: R$${subtotal.toFixed(2)}%0A`
-texto+=`🚚 Frete: R$${frete.toFixed(2)}%0A`
-texto+=`💵 Total: R$${total.toFixed(2)}%0A`
-texto+=`%0A💳 Pagamento: ${pagamento}%0A`
-texto+=`📦 Modalidade: ${tipo}%0A`
+texto+=`Subtotal: R$${subtotal}%0AFrete: R$${frete}%0ATotal: R$${total}%0A`;
+texto+=`Pagamento: ${pagamento}%0A`;
+texto+=`Tipo: ${tipo}%0A`;
 
 if(tipo==='entrega'){
-texto+=`📍 Endereço: ${endereco}%0A`
+texto+=`Endereço: ${endereco}%0A`;
 }
 
-window.open('https://wa.me/5511939102961?text='+texto)
+window.open('https://wa.me/5511939102961?text='+texto);
 }
 
 /* VER MAIS */
-let visiveis=10
-function mostrarProdutos(){
-let produtos=document.querySelectorAll('.produto')
-produtos.forEach((p,i)=>{
-p.style.display=i<visiveis?'block':'none'
-})
+let visiveis=10;
+function carregarMais(){
+visiveis+=10;
+document.querySelectorAll('.produto').forEach((p,i)=>{
+p.style.display=i<visiveis?'block':'none';
+});
 }
-function carregarMais(){visiveis+=10;mostrarProdutos()}
 
 /* BUSCA */
-function buscarProduto(valor){
-valor=valor.toLowerCase()
+function buscarProduto(v){
+v=v.toLowerCase();
 document.querySelectorAll('.produto').forEach(p=>{
-let nome=p.querySelector('h3').innerText.toLowerCase()
-p.style.display=nome.includes(valor)?'block':'none'
-})
+p.style.display=p.innerText.toLowerCase().includes(v)?'block':'none';
+});
 }
 
-window.onload=mostrarProdutos
+window.onload=carregarMais;
 </script>
 
 </body>
