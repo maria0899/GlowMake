@@ -3,7 +3,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glow Make</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script><style>
+<script src="https://unpkg.com/lucide@latest">let itensVisiveis = 10;function mostrarProdutos(){ let produtos = document.querySelectorAll('.produto'); produtos.forEach((p, index)=>{ p.style.display = index < itensVisiveis ? 'block' : 'none'; }); }
+
+function carregarMais(){ itensVisiveis += 10; mostrarProdutos(); }
+
+window.onload = mostrarProdutos;
+
+let itensVisiveis = 10;
+
+function mostrarProdutos(){ let produtos = document.querySelectorAll('.produto'); produtos.forEach((p, index)=>{ p.style.display = index < itensVisiveis ? 'block' : 'none'; }); }
+
+function carregarMais(){ itensVisiveis += 10; mostrarProdutos(); }
+
+window.onload = mostrarProdutos;
+
+</script><style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Poppins',sans-serif;background:#f6f6f6}
 
@@ -28,6 +42,34 @@ section{display:none;padding:20px}
 .produto img{width:100%;border-radius:10px}
 .preco{color:#ff4d8d;font-weight:bold}
 .btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;margin-top:5px;cursor:pointer}
+
+.produto{display:none}
+
+.ver-mais{
+  margin:20px auto;
+  display:block;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#ff4d8d;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.produto{display:none}
+
+.ver-mais{
+  margin:20px auto;
+  display:block;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#ff4d8d;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
 
 .ver-mais{margin:20px auto;display:block;padding:12px;border:none;border-radius:12px;background:#ff4d8d;color:#fff;font-weight:bold}
 
@@ -81,7 +123,8 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 <div class="box">
 <h3>Sobre a Glow Make</h3>
 <p>Somos apaixonados por beleza e autoestima. Trabalhamos com produtos acessíveis e de qualidade para você se sentir ainda mais linda todos os dias.</p>
-</div>
+</div><button class="ver-mais" onclick="carregarMais()">Ver mais produtos</button>
+
 </section><section id="contato">
 <a class="btn-contato whats" href="https://wa.me/5511939102961">WhatsApp</a>
 <a class="btn-contato insta" href="https://www.instagram.com/glowmakee10">Instagram</a>
@@ -136,5 +179,37 @@ function finalizar(){let texto='🛍️ Pedido Glow Make 💖%0A%0A';texto+='�
 let avaliacoes=["★★★★★ Amei!","★★★★★ Perfeito","★★★★★ Chegou rápido","★★★★★ Recomendo"];
 let i=0;
 setInterval(()=>{i=(i+1)%avaliacoes.length;document.getElementById('avaliacao').innerText=avaliacoes[i]},3000);
+let itensVisiveis = 10;
+
+function mostrarProdutos(){
+  let produtos = document.querySelectorAll('.produto');
+  produtos.forEach((p, index)=>{
+    p.style.display = index < itensVisiveis ? 'block' : 'none';
+  });
+}
+
+function carregarMais(){
+  itensVisiveis += 10;
+  mostrarProdutos();
+}
+
+window.onload = mostrarProdutos;
+
+let itensVisiveis = 10;
+
+function mostrarProdutos(){
+  let produtos = document.querySelectorAll('.produto');
+  produtos.forEach((p, index)=>{
+    p.style.display = index < itensVisiveis ? 'block' : 'none';
+  });
+}
+
+function carregarMais(){
+  itensVisiveis += 10;
+  mostrarProdutos();
+}
+
+window.onload = mostrarProdutos;
+
 </script></body>
 </html>
