@@ -337,7 +337,7 @@ function fecharCarrinho(){ modal.style.display='none'; }
 
 function finalizar(){
     if (carrinho.length === 0) {
-        alert("🛒 Seu carrinho está vazio!");
+        alert("\uD83D\uDED2 Seu carrinho está vazio!");
         return;
     }
 
@@ -346,30 +346,31 @@ function finalizar(){
     let tipo = document.getElementById('tipo').value;
     let endereco = document.getElementById('endereco').value;
 
-    let texto = `🛍️ Pedido Glow Make 💖\n\n`;
-    texto += `👤 Nome: ${nome}\n\n📦 Itens:\n`;
+    let texto = "\uD83D\uDED2 Pedido Glow Make \u2764\uFE0F\n\n";
+    texto += "\uD83D\uDC64 Nome: " + nome + "\n\n\uD83D\uDCE6 Itens:\n";
 
     let subtotal = 0;
     carrinho.forEach(i => {
-        texto += `• ${i.nome} x${i.qtd}\n`;
+        texto += "• " + i.nome + " x" + i.qtd + "\n";
         subtotal += i.preco * i.qtd;
     });
 
     let frete = tipo === 'entrega' ? 2 : 0;
     let total = subtotal + frete;
 
-    texto += `\n💰 Subtotal: R$${subtotal.toFixed(2)}\n`;
-    texto += `🚚 Frete: R$${frete.toFixed(2)}\n`;
-    texto += `💵 Total: R$${total.toFixed(2)}\n`;
-    texto += `\n💳 Pagamento: ${pagamento}\n📦 Tipo: ${tipo}\n`;
+    texto += "\n\uD83D\uDCB0 Subtotal: R$" + subtotal.toFixed(2) + "\n";
+    texto += "\uD83D\uDE9A Frete: R$" + frete.toFixed(2) + "\n";
+    texto += "\uD83D\uDCB5 Total: R$" + total.toFixed(2) + "\n";
+    texto += "\n\uD83D\uDCB3 Pagamento: " + pagamento + "\n\uD83D\uDCE6 Tipo: " + tipo + "\n";
 
     if (tipo === 'entrega') {
-        texto += `📍 Endereço: ${endereco}\n`;
+        texto += "\uD83D\uDCCD Endereço: " + endereco + "\n";
     }
 
-    texto += `\n✨ Aguardo confirmação!`;
+    texto += "\n\u2728 Aguardo confirmação!";
 
-    let link = "https://wa.me/5511939102961?text=" + encodeURIComponent(texto);
+    // Usando api.whatsapp.com para abrir melhor pelo Instagram
+    let link = "https://api.whatsapp.com/send?phone=5511939102961&text=" + encodeURIComponent(texto);
     window.open(link, '_blank');
 }
 
