@@ -4,45 +4,58 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glow Make</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Poppins',sans-serif;background:#f6f6f6}
+/* HEADER */
 header{background:#fff;padding:10px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
 .topo{display:flex;justify-content:space-between;align-items:center}
 header img{width:100px}
+/* CARRINHO FIXO */
 .carrinho-top{position:fixed;top:15px;right:15px;background:linear-gradient(135deg,#25d366,#1da851);color:#fff;padding:12px;border-radius:15px;text-align:center;width:85px;box-shadow:0 5px 15px rgba(0,0,0,.2);cursor:pointer;z-index:1000}
+/* NAV */
 nav{display:flex;gap:8px;overflow:auto;margin-top:10px}
 nav a{padding:8px 12px;border-radius:20px;background:#ffe4ee;color:#ff4d8d;cursor:pointer}
 nav a.active{background:#ff4d8d;color:#fff}
+/* SEÇÕES */
 section{display:none;padding:20px}
 .active{display:block}
+/* HOME */
 .hero{text-align:center;padding:40px;background:linear-gradient(135deg,#ff7eb3,#ff4d8d);color:#fff;border-radius:25px}
 .box{margin-top:15px;background:#fff;padding:15px;border-radius:15px}
+/* CATÁLOGO */
 .catalogo{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
 .produto{background:#fff;border-radius:15px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
 .produto img{width:100%;border-radius:10px}
 .preco{color:#ff4d8d;font-weight:bold}
 .btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;margin-top:5px;cursor:pointer}
+/* MODAL */
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#f9f9f9;padding:20px;display:none;overflow:auto;z-index:2000}
+/* ITENS */
 .item{background:#fff;padding:15px;border-radius:16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 6px 15px rgba(0,0,0,.06)}
 .qtd-box{display:flex;gap:8px}
 .qtd-btn{background:#ff4d8d;color:#fff;border:none;width:28px;height:28px;border-radius:8px;cursor:pointer}
+/* INPUTS */
 input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1px solid #eee}
+/* RESUMO */
 .resumo{margin-top:15px;background:#fff;padding:15px;border-radius:15px}
 .total-final{font-weight:bold;font-size:18px}
+/* BOTÃO FINALIZAR */
 .finalizar{background:linear-gradient(135deg,#25d366,#1da851);color:#fff;padding:14px;border:none;border-radius:12px;margin-top:10px;width:100%}
+/* CONTATO */
 .btn-contato{display:flex;justify-content:center;gap:10px;padding:12px;border-radius:12px;margin-top:10px;color:#fff;text-decoration:none}
 .whats{background:#25d366}
 .insta{background:#E4405F}
-#busca{margin-bottom:15px;padding:10px;border-radius:12px;border:1px solid #eee;width:100%}
+/* Avaliações animadas */
+.avaliacao{opacity:0;transform:translateY(20px);animation:fadeInUp 1s forwards;animation-delay:0.2s}
+.avaliacao:nth-child(2){animation-delay:0.4s}
+.avaliacao:nth-child(3){animation-delay:0.6s}
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
-
 <header>
 <div class="topo">
 <img src="logo.jpg">
@@ -71,64 +84,67 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 </div>
 <div class="box">
 <h3>⭐ Avaliações</h3>
-<p>★★★★★ “Perfeito!”</p>
-<p>★★★★★ “Amei demais!”</p>
+<p class="avaliacao">★★★★★ “Perfeito!”</p>
+<p class="avaliacao">★★★★★ “Amei demais!”</p>
+<p class="avaliacao">★★★★★ “Entrega rápida e produtos ótimos!”</p>
+</div>
+</section>
+
+<section id="sobre">
+<div class="box">
+<h2>Sobre a Glow Make</h2>
+<p>Endereço: Rua da Beleza, 123 – São Paulo, SP</p>
+<p>Missão: Elevar a autoestima de cada cliente.</p>
+<p>Visão: Ser referência em produtos de beleza de qualidade.</p>
+<p>Valores: Confiança, Qualidade e Atendimento Humanizado.</p>
 </div>
 </section>
 
 <section id="catalogo">
-<input type="text" id="busca" placeholder="Buscar produto..." onkeyup="filtrar()">
-<div class="catalogo" id="catalogoLista">
-<!-- PRODUTOS -->
+<div class="catalogo">
+<!-- Produtos: parte 1 -->
 <div class="produto">
 <img src="imagens/Gloss_Labial_MaxLove.jpg">
 <h3>Gloss Labial MaxLove</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Gloss Labial MaxLove',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Primer_MaxLove.jpg">
 <h3>Primer MaxLove</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Primer MaxLove',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/blush_liquido_hudabeauty.jpg">
 <h3>Blush Líquido HudaBeauty</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Blush Líquido HudaBeauty',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Cola_Cilios.jpg">
 <h3>Cola para Cílios</h3>
 <p class="preco">R$5,00</p>
 <div class="btn" onclick="add('Cola para Cílios',5)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Batom.jpg">
 <h3>Batom</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Batom',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Rímel.jpg">
 <h3>Rímel</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Rímel',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Delineador_Teddy.jpg">
 <h3>Delineador Teddy</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Delineador Teddy',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Iluminador_vivai.jpg">
 <h3>Iluminador Vivai</h3>
@@ -136,181 +152,165 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 <div class="btn" onclick="add('Iluminador Vivai',10)">Comprar</div>
 </div>
 
+<!-- Produtos: parte 2 -->
 <div class="produto">
 <img src="imagens/Gloss_Glitter.jpg">
 <h3>Gloss Glitter</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Gloss Glitter',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Lip_Gloss.jpg">
 <h3>Lip Gloss</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Lip Gloss',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Paleta_de_sombras.jpg">
 <h3>Paleta de Sombras</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Paleta de Sombras',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Pó_compacto.jpg">
 <h3>Pó Compacto</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Pó Compacto',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Pó_para_sobrancelhas.jpg">
 <h3>Pó para Sobrancelhas</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Pó para Sobrancelhas',10)">Comprar</div>
 </div>
-
+<div class="produto">
+<img src="imagens/GlossLabial_Maxlove.jpg">
+<h3>Gloss Labial</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Gloss Labial - Max Love',10)">Comprar</div>
+</div>
 <div class="produto">
 <img src="imagens/Base_prettyNatural.jpg">
 <h3>Base - Pretty Natural</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Base - Pretty Natural',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Brilho_labial5.jpg">
 <h3>Brilho Labial</h3>
 <p class="preco">R$5,00</p>
 <div class="btn" onclick="add('Brilho Labial',5)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Bruma_Matte_LadyBeauty.jpg">
 <h3>Bruma Matte - Lady Beauty</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Bruma Matte - Lady Beauty',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Cola_cilios_macrilan.jpg">
 <h3>Cola para Cílios - Macrilan</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Cola para Cílios - Macrilan',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Corretivo_liquido.jpg">
 <h3>Corretivo Líquido</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Corretivo Líquido',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Creme_para_a_area_dos_olhos.jpg">
 <h3>Creme Para a Área dos Olhos</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Creme para a área dos olhos',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Cílios_Posticos_SabrinaSato.jpg">
 <h3>Cílios Postiços - Sabrina Sato</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Cílios Postiços - Sabrina Sato',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Escova_Quadrada.jpg">
 <h3>Escova Quadrada</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Escova Quadrada',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Escova_de_cabelo.jpg">
 <h3>Escova de Cabelo</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Escova de Cabelo',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Escova_de_maquiagem_Madala.jpg">
 <h3>Escova de Maquiagem - Madala</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Escova de Maquiagem - Madala',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Esponja_BelaManuela.jpg">
 <h3>Esponja - Bela Manuela</h3>
 <p class="preco">R$5,00</p>
 <div class="btn" onclick="add('Esponja - Bela Manuela',5)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Folhas_antioleosidade5.jpg">
 <h3>Folhas Anti oleosidade</h3>
 <p class="preco">R$5,00</p>
 <div class="btn" onclick="add('Folhas Anti Oleosidade',5)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Pó_de_Banana.jpg">
 <h3>Pó de Banana</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Pó de Banana',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Mascara_facial5.jpg">
 <h3>Máscara Facial</h3>
 <p class="preco">R$5,00</p>
 <div class="btn" onclick="add('Máscara Facial',5)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Kit_Pinceis.jpg">
 <h3>Kit de Pincéis</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Kit de Pincéis',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Sérum_Facial_Maxlove.jpg">
 <h3>Sérum Facial</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Sérum Facial - Max Love',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Sabonete_facial_hidratante.jpg">
 <h3>Sabonete Facial</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Sabonete Facial Hidratante',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Touca.jpg">
 <h3>Touca</h3>
 <p class="preco">R$5,00</p>
 <div class="btn" onclick="add('Touca',5)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Hidratante_Labial_Beautyloo.jpg">
 <h3>Hidratante Labial - Beautyloo</h3>
 <p class="preco">R$10,00</p>
-<div class="btn" onclick="add('Hidratante Labial - Beatyloo',10)">Comprar</div>
+<div class="btn" onclick="add('Hidratante Labial - Beautyloo',10)">Comprar</div>
 </div>
-
 <div class="produto">
 <img src="imagens/Brush_Facial.jpg">
 <h3>Blush Facial</h3>
 <p class="preco">R$10,00</p>
 <div class="btn" onclick="add('Blush Facial',10)">Comprar</div>
 </div>
-</div> <!-- FIM CATALOGOLISTA -->
+
+</div>
 </section>
 
 <section id="contato">
@@ -325,7 +325,6 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 <div class="modal" id="modal">
 <h2>Seu Carrinho</h2>
 <div id="lista"></div>
-
 <input id="nomeCliente" placeholder="Seu nome">
 <select id="pagamento">
 <option>Forma de pagamento</option>
@@ -339,7 +338,6 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 <option value="entrega">Entrega</option>
 </select>
 <input id="endereco" placeholder="Endereço">
-
 <div class="resumo">
 <p>Subtotal: R$ <span id="subtotal">0.00</span></p>
 <p>Frete: R$ <span id="frete">0.00</span></p>
@@ -354,7 +352,7 @@ lucide.createIcons();
 let carrinho=[];
 function mostrar(sec){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(sec).classList.add('active');}
 function add(nome,preco){let item=carrinho.find(i=>i.nome===nome);if(item){item.qtd++}else{carrinho.push({nome,preco,qtd:1})}update();}
-function update(){let lista=document.getElementById('lista');lista.innerHTML='';let subtotal=0,qtd=0;carrinho.forEach((i,index)=>{subtotal+=i.preco*i.qtd;qtd+=i.qtd;lista.innerHTML+=`<div class="item">${i.nome}<div class="qtd-box"><button class="qtd-btn" onclick="diminuir(${index})">-</button>${i.qtd}<button class="qtd-btn" onclick="aumentar(${index})">+</button></div></div>`});let tipo=document.getElementById('tipo').value;let frete=tipo==='entrega'?2:0;let total=subtotal+frete;document.getElementById('subtotal').innerText=subtotal.toFixed(2);document.getElementById('frete').innerText=frete.toFixed(2);document.getElementById('total').innerText=total.toFixed(2);document.getElementById('totalBtn').innerText=total.toFixed(2);document.getElementById('qtd').innerText=qtd;}
+function update(){let lista=document.getElementById('lista');lista.innerHTML='';let subtotal=0;let qtd=0;carrinho.forEach((i,index)=>{subtotal+=i.preco*i.qtd;qtd+=i.qtd;lista.innerHTML+=`<div class="item">${i.nome}<div class="qtd-box"><button class="qtd-btn" onclick="diminuir(${index})">-</button>${i.qtd}<button class="qtd-btn" onclick="aumentar(${index})">+</button></div></div>`;});let tipo=document.getElementById('tipo').value;let frete=tipo==='entrega'?2:0;let total=subtotal+frete;document.getElementById('subtotal').innerText=subtotal.toFixed(2);document.getElementById('frete').innerText=frete.toFixed(2);document.getElementById('total').innerText=total.toFixed(2);document.getElementById('totalBtn').innerText=total.toFixed(2);document.getElementById('qtd').innerText=qtd;}
 function aumentar(i){carrinho[i].qtd++;update();}
 function diminuir(i){if(carrinho[i].qtd>1){carrinho[i].qtd--}else{carrinho.splice(i,1)}update();}
 function abrirCarrinho(){modal.style.display='block';update();}
@@ -379,13 +377,6 @@ texto+=`📦 Tipo: ${tipo}%0A`;
 if(tipo==='entrega'){texto+=`📍 Endereço: ${endereco}%0A`;}
 texto+='%0A✨ Aguardo confirmação!';
 window.open('https://wa.me/5511939102961?text='+texto);
-}
-// FUNÇÃO BUSCA
-function filtrar(){
-let filtro=document.getElementById('busca').value.toLowerCase();
-document.querySelectorAll('#catalogoLista .produto').forEach(p=>{
-p.style.display=p.querySelector('h3').innerText.toLowerCase().includes(filtro)?'block':'none';
-});
 }
 </script>
 </body>
