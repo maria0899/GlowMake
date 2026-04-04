@@ -3,21 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glow Make</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest">let itensVisiveis = 10;function mostrarProdutos(){ let produtos = document.querySelectorAll('.produto'); produtos.forEach((p, index)=>{ p.style.display = index < itensVisiveis ? 'block' : 'none'; }); }
-
-function carregarMais(){ itensVisiveis += 10; mostrarProdutos(); }
-
-window.onload = mostrarProdutos;
-
-let itensVisiveis = 10;
-
-function mostrarProdutos(){ let produtos = document.querySelectorAll('.produto'); produtos.forEach((p, index)=>{ p.style.display = index < itensVisiveis ? 'block' : 'none'; }); }
-
-function carregarMais(){ itensVisiveis += 10; mostrarProdutos(); }
-
-window.onload = mostrarProdutos;
-
-</script><style>
+<script src="https://unpkg.com/lucide@latest"></script><style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Poppins',sans-serif;background:#f6f6f6}
 
@@ -42,34 +28,6 @@ section{display:none;padding:20px}
 .produto img{width:100%;border-radius:10px}
 .preco{color:#ff4d8d;font-weight:bold}
 .btn{background:#ff4d8d;color:#fff;padding:8px;border-radius:20px;margin-top:5px;cursor:pointer}
-
-.produto{display:none}
-
-.ver-mais{
-  margin:20px auto;
-  display:block;
-  padding:12px;
-  border:none;
-  border-radius:12px;
-  background:#ff4d8d;
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.produto{display:none}
-
-.ver-mais{
-  margin:20px auto;
-  display:block;
-  padding:12px;
-  border:none;
-  border-radius:12px;
-  background:#ff4d8d;
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-}
 
 .ver-mais{margin:20px auto;display:block;padding:12px;border:none;border-radius:12px;background:#ff4d8d;color:#fff;font-weight:bold}
 
@@ -112,19 +70,187 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 <p>💖 Autoestima • 💄 Qualidade • 🤝 Confiança • ✨ Tendência • 💰 Preço justo</p>
 </div><div class="box">
 <h3>⭐ Avaliações</h3>
-<p id="avaliacao" class="avaliacao">★★★★★ “Perfeito!”</p>
+<p id="avaliacao" class="avaliacao">★★★★★ "Amei demais!" — Ana</p>
 </div>
 </section><section id="catalogo">
-<div class="catalogo" id="catalogoLista"><!-- MANTIVE SUAS IMAGENS --><div class="produto"><img src="imagens/Gloss_Labial_MaxLove.jpg"><h3>Gloss Labial MaxLove</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Gloss Labial MaxLove',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/Primer_MaxLove.jpg"><h3>Primer MaxLove</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Primer MaxLove',10)">Comprar</div></div>
-<div class="produto"><img src="imagens/blush_liquido_hudabeauty.jpg"><h3>Blush Líquido</h3><p class="preco">R$10,00</p><div class="btn" onclick="add('Blush Líquido',10)">Comprar</div></div></div><button class="ver-mais" onclick="carregarMais()">Ver mais produtos</button>
+<div class="catalogo" id="catalogoLista"><!-- PRODUTOS COMPLETOS --><div class="produto">
+<img src="imagens/Gloss_Labial_MaxLove.jpg">
+<h3>Gloss Labial MaxLove</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Gloss Labial MaxLove',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Primer_MaxLove.jpg">
+<h3>Primer MaxLove</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Primer MaxLove',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/blush_liquido_hudabeauty.jpg">
+<h3>Blush Líquido HudaBeauty</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Blush Líquido HudaBeauty',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Cola_Cilios.jpg">
+<h3>Cola para Cílios</h3>
+<p class="preco">R$5,00</p>
+<div class="btn" onclick="add('Cola para Cílios',5)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Batom.jpg">
+<h3>Batom</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Batom',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Rímel.jpg">
+<h3>Rímel</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Rímel',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Delineador_Teddy.jpg">
+<h3>Delineador Teddy</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Delineador Teddy',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Iluminador_vivai.jpg">
+<h3>Iluminador Vivai</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Iluminador Vivai',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Gloss_Glitter.jpg">
+<h3>Gloss Glitter</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Gloss Glitter',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Lip_Gloss.jpg">
+<h3>Lip Gloss</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Lip Gloss',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Paleta_de_sombras.jpg">
+<h3>Paleta de Sombras</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Paleta de Sombras',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Pó_compacto.jpg">
+<h3>Pó Compacto</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Pó Compacto',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Pó_para_sobrancelhas.jpg">
+<h3>Pó para Sobrancelhas</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Pó para Sobrancelhas',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/GlossLabial_Maxlove.jpg">
+<h3>Gloss Labial</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Gloss Labial - Max Love',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Base_prettyNatural.jpg">
+<h3>Base - Pretty Natural</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Base - Pretty Natural',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Brilho_labial5.jpg">
+<h3>Brilho Labial</h3>
+<p class="preco">R$5,00</p>
+<div class="btn" onclick="add('Brilho Labial',5)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Bruma_Matte_LadyBeauty.jpg">
+<h3>Bruma Matte - Lady Beauty</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Bruma Matte - Lady Beauty',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Cola_cilios_macrilan.jpg">
+<h3>Cola para Cílios - Macrilan</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Cola para Cílios - Macrilan',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Corretivo_liquido.jpg">
+<h3>Corretivo Líquido</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Corretivo Líquido',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Creme_para_a_area_dos_olhos.jpg">
+<h3>Creme Para a Área dos Olhos</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Creme para a área dos olhos',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Cílios_Posticos_SabrinaSato.jpg">
+<h3>Cílios Postiços - Sabrina Sato</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Cílios Postiços - Sabrina Sato',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Escova_Quadrada.jpg">
+<h3>Escova Quadrada</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Escova Quadrada',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Escova_de_cabelo.jpg">
+<h3>Escova de Cabelo</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Escova de Cabelo',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Escova_de_maquiagem_Madala.jpg">
+<h3>Escova de Maquiagem - Madala</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Escova de Maquiagem - Madala',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Esponja_BelaManuela.jpg">
+<h3>Esponja - Bela Manuela</h3>
+<p class="preco">R$5,00</p>
+<div class="btn" onclick="add('Esponja - Bela Manuela',5)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Folhas_antioleosidade5.jpg">
+<h3>Folhas Anti oleosidade</h3>
+<p class="preco">R$5,00</p>
+<div class="btn" onclick="add('Folhas Anti Oleosidade',5)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Pó_de_Banana.jpg">
+<h3>Pó de Banana</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Pó de Banana',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Mascara_facial5.jpg">
+<h3>Máscara Facial</h3>
+<p class="preco">R$5,00</p>
+<div class="btn" onclick="add('Máscara Facial',5)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Kit_Pinceis.jpg">
+<h3>Kit de Pincéis</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Kit de Pincéis',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Sérum_Facial_Maxlove.jpg">
+<h3>Sérum Facial</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Sérum Facial - Max Love',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Sabonete_facial_hidratante.jpg">
+<h3>Sabonete Facial</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Sabonete Facial Hidratante',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Touca.jpg">
+<h3>Touca</h3>
+<p class="preco">R$5,00</p>
+<div class="btn" onclick="add('Touca',5)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Hidratante_Labial_Beautyloo.jpg">
+<h3>Hidratante Labial - Beautyloo</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Hidratante Labial - Beatyloo',10)">Comprar</div>
+</div><div class="produto">
+<img src="imagens/Brush_Facial.jpg">
+<h3>Blush Facial</h3>
+<p class="preco">R$10,00</p>
+<div class="btn" onclick="add('Blush Facial',10)">Comprar</div>
+</div>
+</div><button class="ver-mais" onclick="carregarMais()">Ver mais produtos</button>
 
 </section><section id="sobre">
 <div class="box">
 <h3>Sobre a Glow Make</h3>
 <p>Somos apaixonados por beleza e autoestima. Trabalhamos com produtos acessíveis e de qualidade para você se sentir ainda mais linda todos os dias.</p>
-</div><button class="ver-mais" onclick="carregarMais()">Ver mais produtos</button>
-
+</div>
 </section><section id="contato">
 <a class="btn-contato whats" href="https://wa.me/5511939102961">WhatsApp</a>
 <a class="btn-contato insta" href="https://www.instagram.com/glowmakee10">Instagram</a>
@@ -146,6 +272,7 @@ input,select{width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1
 <button onclick="fecharCarrinho()">Fechar</button>
 </div><script>
 lucide.createIcons();
+const modal = document.getElementById('modal');
 let carrinho=[];
 let visiveis=10;
 
@@ -176,40 +303,19 @@ function fecharCarrinho(){modal.style.display='none';}
 
 function finalizar(){let texto='🛍️ Pedido Glow Make 💖%0A%0A';texto+='📦 *Itens:*%0A';carrinho.forEach(i=>{texto+=`🛒 ${i.nome}%0AQuantidade: ${i.qtd}%0A`});window.open('https://wa.me/5511939102961?text='+texto);}
 
-let avaliacoes=["★★★★★ Amei!","★★★★★ Perfeito","★★★★★ Chegou rápido","★★★★★ Recomendo"];
+let avaliacoes=[
+"★★★★★ \"Amei demais!\" — Ana",
+"★★★★★ \"Chegou super rápido\" — Mariana",
+"★★★★★ \"Produto perfeito\" — Juliana",
+"★★★★★ \"Qualidade incrível\" — Camila",
+"★★★★★ \"Vou comprar de novo\" — Beatriz",
+"★★★★★ \"Muito lindo!\" — Fernanda",
+"★★★★★ \"Vale muito a pena\" — Larissa",
+"★★★★★ \"Entrega rápida e bem embalado\" — Rafaela",
+"★★★★★ \"Melhor loja!\" — Bruna",
+"★★★★★ \"Amei tudo!\" — Amanda"
+];
 let i=0;
 setInterval(()=>{i=(i+1)%avaliacoes.length;document.getElementById('avaliacao').innerText=avaliacoes[i]},3000);
-let itensVisiveis = 10;
-
-function mostrarProdutos(){
-  let produtos = document.querySelectorAll('.produto');
-  produtos.forEach((p, index)=>{
-    p.style.display = index < itensVisiveis ? 'block' : 'none';
-  });
-}
-
-function carregarMais(){
-  itensVisiveis += 10;
-  mostrarProdutos();
-}
-
-window.onload = mostrarProdutos;
-
-let itensVisiveis = 10;
-
-function mostrarProdutos(){
-  let produtos = document.querySelectorAll('.produto');
-  produtos.forEach((p, index)=>{
-    p.style.display = index < itensVisiveis ? 'block' : 'none';
-  });
-}
-
-function carregarMais(){
-  itensVisiveis += 10;
-  mostrarProdutos();
-}
-
-window.onload = mostrarProdutos;
-
 </script></body>
 </html>
