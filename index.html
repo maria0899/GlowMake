@@ -46,14 +46,7 @@ section{display:none;padding:20px}
 .hero{text-align:center;padding:40px;background:linear-gradient(135deg,#ff7eb3,#ff4d8d);color:#fff;border-radius:25px}
 .box{margin-top:15px;background:#fff;padding:15px;border-radius:15px}
 
-/* Avaliações animadas */
-.avaliacao{opacity:0;transform:translateY(20px);animation:fadeInUp 0.5s forwards;animation-delay: var(--delay);}
-@keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
-
 /* CATÁLOGO */
-.catalogo-controls{margin-bottom:15px;display:flex;justify-content:end}
-.catalogo-controls input{padding:8px;border-radius:12px;border:1px solid #ccc;width:200px}
-
 .catalogo{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
 .produto{background:#fff;border-radius:15px;padding:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
 .produto img{width:100%;border-radius:10px}
@@ -128,6 +121,18 @@ input,select{
 }
 .whats{background:#25d366}
 .insta{background:#E4405F}
+
+/* ANIMAÇÃO AVALIAÇÕES */
+@keyframes estrela{
+  0%{transform:scale(0);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+.avaliacao span{display:inline-block;animation:estrela 1s ease-in-out infinite;}
+.avaliacao span:nth-child(2){animation-delay:.2s;}
+.avaliacao span:nth-child(3){animation-delay:.4s;}
+.avaliacao span:nth-child(4){animation-delay:.6s;}
+.avaliacao span:nth-child(5){animation-delay:.8s;}
 </style>
 </head>
 
@@ -147,8 +152,10 @@ input,select{
 <a onclick="mostrar('sobre')">Sobre</a>
 <a onclick="mostrar('contato')">Contato</a>
 </nav>
+
 </header>
 
+<!-- SEÇÃO INÍCIO -->
 <section id="inicio" class="active">
 <div class="hero">
 <h2>Glow Make ✨</h2>
@@ -156,29 +163,41 @@ input,select{
 </div>
 
 <div class="box">
-<h3>⭐ Avaliações</h3>
-<p class="avaliacao" style="--delay:0s">★★★★★ “Perfeito!”</p>
-<p class="avaliacao" style="--delay:0.2s">★★★★★ “Amei demais!”</p>
-<p class="avaliacao" style="--delay:0.4s">★★★★★ “Entrega rápida e produtos lindos!”</p>
-<p class="avaliacao" style="--delay:0.6s">★★★★★ “Super recomendo!”</p>
-<p class="avaliacao" style="--delay:0.8s">★★★★★ “Preço justo e ótima qualidade.”</p>
+<h3>Missão</h3>
+<p>Elevar a autoestima de todos.</p>
+<h3>Visão</h3>
+<p>Ser referência em beleza e cuidado pessoal.</p>
+<h3>Valores</h3>
+<p>Qualidade, confiança e inovação.</p>
 </div>
 
-<section id="sobre">
 <div class="box">
-<h3>Endereço da Loja</h3>
-<p>Rua Exemplo, 123, Bairro Centro, Cidade - SP</p>
+<h3>⭐ Avaliações</h3>
+<p class="avaliacao">
+<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+</p>
+<p class="avaliacao">
+<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+</p>
+<p class="avaliacao">
+<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+</p>
 </div>
 </section>
 
-<section id="catalogo">
-<div class="catalogo-controls">
-<input type="text" id="pesquisar" placeholder="Pesquisar produto..." onkeyup="filtrarProdutos()">
+<!-- SEÇÃO SOBRE -->
+<section id="sobre">
+<div class="box">
+<h3>📍 Endereço da Loja</h3>
+<p>Rua da Beleza, 123 - São Paulo, SP</p>
 </div>
+</section>
+<!-- SEÇÃO CATÁLOGO -->
+<section id="catalogo">
+<input type="text" id="busca" placeholder="🔍 Pesquise um produto..." onkeyup="filtrar()">
+<div class="catalogo" id="produtosCatalogo">
 
-<div class="catalogo" id="listaProdutos">
-
-<!-- Lista de produtos -->
+<!-- Exemplo de produto -->
 <div class="produto">
 <img src="imagens/Gloss_Labial_MaxLove.jpg">
 <h3>Gloss Labial MaxLove</h3>
@@ -193,43 +212,21 @@ input,select{
 <div class="btn" onclick="add('Primer MaxLove',10)">Comprar</div>
 </div>
 
-<div class="produto">
-<img src="imagens/blush_liquido_hudabeauty.jpg">
-<h3>Blush Líquido HudaBeauty</h3>
-<p class="preco">R$10,00</p>
-<div class="btn" onclick="add('Blush Líquido HudaBeauty',10)">Comprar</div>
-</div>
-
-<div class="produto">
-<img src="imagens/Cola_Cilios.jpg">
-<h3>Cola para Cílios</h3>
-<p class="preco">R$5,00</p>
-<div class="btn" onclick="add('Cola para Cílios',5)">Comprar</div>
-</div>
-
-<div class="produto">
-<img src="imagens/Batom.jpg">
-<h3>Batom</h3>
-<p class="preco">R$10,00</p>
-<div class="btn" onclick="add('Batom',10)">Comprar</div>
-</div>
-
-<!-- Continue adicionando os demais produtos como antes -->
-<!-- Certifique-se que todas as 34 imagens e produtos estejam aqui, no mesmo formato -->
-
+<!-- Repita todos os produtos aqui como já tinha no código anterior -->
 </div>
 </section>
 
+<!-- SEÇÃO CONTATO -->
 <section id="contato">
 <a class="btn-contato whats" href="https://wa.me/5511939102961">
 <i data-lucide="message-circle"></i> WhatsApp
 </a>
-
 <a class="btn-contato insta" href="https://www.instagram.com/glowmakee10">
 <i data-lucide="instagram"></i> Instagram
 </a>
 </section>
 
+<!-- MODAL CARRINHO -->
 <div class="modal" id="modal">
 <h2>Seu Carrinho</h2>
 <div id="lista"></div>
@@ -264,19 +261,20 @@ input,select{
 lucide.createIcons();
 
 let carrinho=[];
-const produtos = document.querySelectorAll('.produto');
 
 function mostrar(sec){
 document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
 document.getElementById(sec).classList.add('active');
 }
 
+// ADICIONAR AO CARRINHO
 function add(nome,preco){
 let item=carrinho.find(i=>i.nome===nome);
 if(item){item.qtd++}else{carrinho.push({nome,preco,qtd:1})}
 update();
 }
 
+// ATUALIZAR CARRINHO
 function update(){
 let lista=document.getElementById('lista');
 lista.innerHTML='';
@@ -315,6 +313,7 @@ function diminuir(i){if(carrinho[i].qtd>1){carrinho[i].qtd--}else{carrinho.splic
 function abrirCarrinho(){modal.style.display='block';update();}
 function fecharCarrinho(){modal.style.display='none';}
 
+// FINALIZAR PEDIDO
 function finalizar(){
 let nome=document.getElementById('nomeCliente').value||'Cliente';
 let pagamento=document.getElementById('pagamento').value;
@@ -323,11 +322,9 @@ let endereco=document.getElementById('endereco').value;
 
 let texto='🛍️ Pedido Glow Make 💖%0A%0A';
 texto+=`👤 Nome: ${nome}%0A%0A`;
-
 texto+='📦 Itens:%0A';
 
 let subtotal=0;
-
 carrinho.forEach(i=>{
 texto+=`• ${i.nome} x${i.qtd}%0A`;
 subtotal+=i.preco*i.qtd;
@@ -339,29 +336,24 @@ let total=subtotal+frete;
 texto+=`%0A💰 Subtotal: R$${subtotal.toFixed(2)}%0A`;
 texto+=`🚚 Frete: R$${frete.toFixed(2)}%0A`;
 texto+=`💵 Total: R$${total.toFixed(2)}%0A`;
-
 texto+=`%0A💳 Pagamento: ${pagamento}%0A`;
 texto+=`📦 Tipo: ${tipo}%0A`;
-
-if(tipo==='entrega'){
-texto+=`📍 Endereço: ${endereco}%0A`;
-}
-
+if(tipo==='entrega'){texto+=`📍 Endereço: ${endereco}%0A`;}
 texto+='%0A✨ Aguardo confirmação!';
 
 window.open('https://wa.me/5511939102961?text='+texto);
 }
 
-// Função de pesquisa no catálogo
-function filtrarProdutos(){
-let filtro = document.getElementById('pesquisar').value.toLowerCase();
-produtos.forEach(prod=>{
-let nome = prod.querySelector('h3').innerText.toLowerCase();
-prod.style.display = nome.includes(filtro)?'block':'none';
-}
-);
+// FILTRAR PRODUTOS
+function filtrar(){
+let busca=document.getElementById('busca').value.toLowerCase();
+let produtos=document.querySelectorAll('#produtosCatalogo .produto');
+produtos.forEach(p=>{
+let nome=p.querySelector('h3').innerText.toLowerCase();
+p.style.display=nome.includes(busca)?'block':'none';
+});
 }
 </script>
-
 </body>
 </html>
+
