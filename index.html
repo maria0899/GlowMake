@@ -524,21 +524,39 @@ function abrirCarrinho(){ modal.style.display='block'; update(); }
 function fecharCarrinho(){ modal.style.display='none'; }
 
 function finalizar(){
-  let nome = document.getElementById('nomeCliente').value||'Cliente';
+  let nome = document.getElementById('nomeCliente').value || 'Cliente';
   let pagamento = document.getElementById('pagamento').value;
   let tipo = document.getElementById('tipo').value;
   let endereco = document.getElementById('endereco').value;
-  let texto = '🛍️ Pedido Glow Make 💖%0A%0A';
-  texto += `👤 Nome: ${nome}%0A%0A📦 Itens:%0A`;
+
+  // Início do texto com emojis
+  let texto = '🛍️✨ Pedido Glow Make 💖✨%0A%0A';
+  texto += `👤 Nome: ${nome}%0A%0A`;
+  texto += `📦 Itens:%0A`;
+
   let subtotal = 0;
-  carrinho.forEach(i=>{ texto += `• ${i.nome} x${i.qtd}%0A`; subtotal += i.preco*i.qtd; });
-  let frete = tipo==='entrega'?2:0;
-  let total = subtotal+frete;
-  texto += `%0A💰 Subtotal: R$${subtotal.toFixed(2)}%0A🚚 Frete: R$${frete.toFixed(2)}%0A💵 Total: R$${total.toFixed(2)}%0A`;
-  texto += `%0A💳 Pagamento: ${pagamento}%0A📦 Tipo: ${tipo}%0A`;
-  if(tipo==='entrega'){ texto += `📍 Endereço: ${endereco}%0A`; }
-  texto += '%0A✨ Aguardo confirmação!';
-  window.open('https://wa.me/5511939102961?text='+texto);
+  carrinho.forEach(i => { 
+    texto += `• ${i.nome} x${i.qtd} 💄%0A`; // Emoji de batom em cada item
+    subtotal += i.preco * i.qtd;
+  });
+
+  let frete = tipo === 'entrega' ? 2 : 0;
+  let total = subtotal + frete;
+
+  texto += `%0A💰 Subtotal: R$${subtotal.toFixed(2)}%0A`;
+  texto += `🚚 Frete: R$${frete.toFixed(2)}%0A`;
+  texto += `💵 Total: R$${total.toFixed(2)}%0A%0A`;
+
+  texto += `💳 Forma de pagamento: ${pagamento} 💰%0A`;
+  texto += `📬 Tipo de pedido: ${tipo === 'entrega' ? 'Entrega 📦' : 'Retirada 🏬'}%0A`;
+  
+  if(tipo === 'entrega'){
+    texto += `📍 Endereço: ${endereco} 🏠%0A`;
+  }
+
+  texto += '%0A✨ Aguardo confirmação! Obrigada 💖🌸';
+
+  window.open('https://wa.me/5511939102961?text=' + texto);
 }
 
 function pesquisar(){
